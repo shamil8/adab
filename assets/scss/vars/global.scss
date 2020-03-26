@@ -4,30 +4,16 @@
 // Переменные, которые используются только в одном разделе, должны определяться в локальном файле по такому же принципу именования но без $g-
 
 // Цвета
-$color_gray: #EDEDED;
-$color_white: #FFFFFF;
-$color_gray: #EDEDED;
-$color_qbox: #33CCCC;
-$color_danger: #e71e1e;
-$color_secondary: #a2a2a2;
-$color_gray_a: #454545;
-$color_gray_b: #8c8c8d;
-$color_gray_c: #d0d0d0;
-$color_content: #ecf0f5;
-$color_line: #d2d6de;
-$qText:     #769fa3;
-$active:    #3d8fbe;
-$darkWhite: #2c3b41;
-$green:     #28a745;
-$drBl:      #1e282c;
+$g-color-blue: #409EFF; // Brand Color
 
-// Цвета
 $g-color-white: #FFFFFF;
+$g-color-light-blue: #D9EEFB;
+$g-color-gray: #909399;
+$g-color-gray-100: #e6e6e6;
+
+$g-color-dark: #222D32;
+$g-color-ebony: #303133;
 $g-color-black: #000000;
-$g-color-qbox: #33CCCC;
-$g-color-dark: #222d32;
-$g-color-gray: #222d32;
-//$g-color-gray: #ECF0F5;
 $g-color-red: #E71E1E;
 
 $g-font-size-base: 1rem;

@@ -3,13 +3,13 @@
       <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
 
         <el-menu-item id="logo" index="1">
-          <i class="el-icon-magic-stick"></i>
+          <i class="el-icon-video-camera-solid"></i>
           <span>Adab</span>
         </el-menu-item>
 
         <el-menu-item index="2">
-          <i class="el-icon-menu"></i>
-          <span slot="title">Navigator Two</span>
+          <i class="el-icon-collection"></i>
+          <span slot="title">Poem</span>
         </el-menu-item>
 
         <el-submenu index="3">
@@ -76,7 +76,8 @@
 
 <style lang="scss">
   .v-nav-menu {
-    background-color: var(--app-background-color);;
+    background-color: var(--app-background);
+    border-right: 1px solid $g-color-gray-100;
     position: fixed;
     font-size: 0;
     top: 0;
@@ -92,54 +93,45 @@
 
       #logo {
         font-size: 32px;
-        color: $g-color-white;
+        color: var(--app-logo-hover);
         &:hover, &:focus  {
           background-color: inherit;
         }
+
         i {
-          color: #3d8fbe;
+          color: var(--app-logo-icon);
         }
       }
 
     }
 
-    // Default style element-ui
-    .el-menu {
-      background: inherit;
-    }
-    .el-submenu__title {
-      color: var(--dynamic-title-color);
-      /*transition: border-color .3s,background-color .3s,color .3s;*/
-      transition: none;
-
-      &:hover {
-        background-color: var(--app-background-color-hover);
-      }
-      &:focus {
-        background-color: var(--app-background-color-focus);
-      }
-
-      i {
-        color: var(--dynamic-title-color);
-      }
-    }
-
-    .el-menu-item {
-      color: $green;
-      transition: none;
-      /*transition: border-color .3s,background-color .3s,color .3s;*/
-
-      &:hover {
-        background-color: #1e282c;
-      }
-      &:focus {
-        background-color: #1e282c;
-      }
-
-      i {
-        color: $g-color-white;
-      }
-    }
-    //End element-ui
   }
+
+  // Default style element-ui
+  .el-menu {
+    background: var(--app-background);
+  }
+  .el-menu--horizontal>.el-menu-item:not(.is-disabled), .el-menu-item, .el-submenu__title {
+    color: var(--app-text-color);
+    /*transition: border-color .3s,background-color .3s,color .3s;*/
+    transition: none;
+
+    &:hover {
+      background: var(--app-background-hover) !important;
+      color: var(--app-text-color);
+    }
+    &:focus {
+      background: var(--app-background-focus) !important;
+      color: var(--app-text-color) !important;
+    }
+
+    i {
+      color: var(--app-text-color);
+    }
+
+    &.is-active, &.is-active i {
+      color: var(--app-text-color-active);
+    }
+  }
+  //End element-ui
 </style>

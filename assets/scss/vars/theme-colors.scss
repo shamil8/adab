@@ -1,20 +1,35 @@
+
 /*
 * === COLORS ===
 */
 :root {
-  --app-background-color: #FFFFFF;
-  --app-background-color-hover: rgba(255, 255, 255, 0.4);
-  --app-background-color-focus: rgba(255, 255, 255, 0.1);
-  --dynamic-title-color: #363636;
-  --dynamic-subtitle-color: #4a4a4a;
+  // background colors
+  --app-background: #FFFFFF;
+  --app-background-hover: #D9EEFB;
+  --app-background-focus: rgba(0, 0, 0, 0.1);
+
+  // text colors
+  --app-text-color: #6c6e73;
+  --app-text-color-active: #409EFF;
+
+  // Logo colors
+  --app-logo-icon: #ffcc33;
+  --app-logo-hover: #222326;
 }
 
 [theme="dark"] {
-  --app-background-color: #091A28;
-  --app-background-color-hover: #1e282c;
-  --app-background-color-focus: #09192c;
-  --dynamic-title-color: #FFFFFF;
-  --dynamic-subtitle-color: cyan;
+  // background colors
+  --app-background: #222D32;
+  --app-background-hover: rgba(0, 0, 0, 0.1);
+  --app-background-focus: rgba(0, 0, 0, 0.1);
+
+  // text colors
+  --app-text-color: #FFFFFF;
+  --app-text-color-active: #409EFF;
+
+  // Logo colors
+  --app-logo-icon: #ffcc33;
+  --app-logo-hover: #dcdcdc;
 }
 
 [theme="sepia"] {
