@@ -6,15 +6,17 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build": "nuxt build",
+    "build": "nuxt generate",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
     "element-ui": "^2.4.11",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vuex": "latest"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2"
   }

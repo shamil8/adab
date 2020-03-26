@@ -23,7 +23,8 @@ export default {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    // './assets/custom-styles.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -40,7 +41,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/style-resources'
   ],
+  styleResources: {
+    scss: [
+      '~assets/scss/vars/*.scss'
+    ]
+  },
   /*
   ** Build configuration
   */

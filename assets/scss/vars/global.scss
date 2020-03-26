@@ -1,0 +1,64 @@
+// Список глобальных переменных для проекта
+// Имена глобальных переменных должны именоваться по определенным правилам: $g-название_группы-тип_настройки-название_настройки: значение;
+// В список глобальных переменных попадают только те значения, которые используются на всех страницах или на большенстве.
+// Переменные, которые используются только в одном разделе, должны определяться в локальном файле по такому же принципу именования но без $g-
+
+// Цвета
+$color_gray: #EDEDED;
+$color_white: #FFFFFF;
+$color_gray: #EDEDED;
+$color_qbox: #33CCCC;
+$color_danger: #e71e1e;
+$color_secondary: #a2a2a2;
+$color_gray_a: #454545;
+$color_gray_b: #8c8c8d;
+$color_gray_c: #d0d0d0;
+$color_content: #ecf0f5;
+$color_line: #d2d6de;
+$qText:     #769fa3;
+$active:    #3d8fbe;
+$darkWhite: #2c3b41;
+$green:     #28a745;
+$drBl:      #1e282c;
+
+// Цвета
+$g-color-white: #FFFFFF;
+$g-color-black: #000000;
+$g-color-qbox: #33CCCC;
+$g-color-dark: #222d32;
+$g-color-gray: #222d32;
+//$g-color-gray: #ECF0F5;
+$g-color-red: #E71E1E;
+
+$g-font-size-base: 1rem;
+$g-font-size-base-px: 16px;
+$g-font-size-light: ($g-font-size-base * 0.85);
+$g-font-size-bigger: ($g-font-size-base * 1.1818);
+$g-font-size-big: ($g-font-size-base * 1.47625);
+
+$g-font-family-default: "PT Sans", sans-serif;
+
+// Ширина планшета 1280px
+$g-screen-width-tablet: 1280px;
+
+
+// Функции
+
+// Вычисление доли от общего значения в процентах
+@function percent($part, $total) {
+  @return $part * 100% / $total;
+}
+
+// Миксин для указания типа блока - flex
+@mixin g-mixin-display-flex {
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// Миксин для обрезания текст с заменой на точки обрезанного текста
+@mixin g-mixin-text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
