@@ -1,9 +1,16 @@
 <template>
-    <div class="v-top-bar" :style="[getIsCollapse ? {'margin-left': '54px'} : {'margin-left': '200px'}]">
-      <el-menu :default-active="activeIndex" class="v-top-bar__container" mode="horizontal" @select="handleSelect">
+    <div class="v-top-bar"
+         :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]"
+    >
+      <el-menu
+        class="v-top-bar__container"
+        mode="horizontal"
+        :default-active="activeIndex"
+        @select="handleSelect"
+      >
 
         <el-menu-item @click="toggleNavMenu" class="v-top-bar__container--nav">
-          <i v-if="getIsCollapse" class="el-icon-d-arrow-right"/>
+          <i v-if="getNavMenu.isCollapse" class="el-icon-d-arrow-right"/>
           <i v-else class="el-icon-d-arrow-left"/>
 
         </el-menu-item>
@@ -36,7 +43,7 @@
         },
         computed: {
             ...mapGetters({
-                getIsCollapse: 'menu/getIsCollapse'
+                getNavMenu: 'menu/getNavMenu'
             })
         },
         methods: {
@@ -55,7 +62,6 @@
     &__container {
       height: 60px;
 
-
       &.el-menu.el-menu--horizontal {
         border-bottom: 1px solid var(--app-border-menu);
 
@@ -70,8 +76,7 @@
         }
       }
 
-
-      &--right, .right-container {
+      &--right, .right-container {  // Right container
         float: right;
         height: 100%;
 

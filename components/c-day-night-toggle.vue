@@ -16,7 +16,7 @@
         name: "c-day-night-toggle",
         data() {
             return {
-                darkMode: false
+                darkMode: this.getTheme === 'dark'
             }
         },
         computed: {
@@ -108,6 +108,7 @@
   // Day State
   /////////////////////////////////////////////////
   .c-day-night-toggle {
+    transform: scale(0.8);
     position: relative;
     display: inline-block;
     width: 100px;

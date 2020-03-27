@@ -1,53 +1,62 @@
 <template>
-    <div class="v-nav-menu" :style="[getIsCollapse ? {'width': '54px'} : {'width': '200px'}]">
+    <div class="v-nav-menu" :style="[getNavMenu.isCollapse ? {'width': getNavMenu.collapse} : {'width': getNavMenu.normal}]">
       <el-scrollbar class="v-nav-menu__scrollbar" :native="false">
-        <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
-
+        <el-menu
+          class="v-nav-menu__container"
+          :default-active="getNavMenu.defaultActive"
+          :collapse="getNavMenu.isCollapse"
+          :collapse-transition="false"
+          @open="handleOpen"
+          @close="handleClose"
+        >
           <el-menu-item id="logo">
             <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
             <span>Adab</span>
           </el-menu-item>
 
-          <el-menu-item index="2">
+          <el-menu-item index="1">
             <i class="el-icon-collection"/>
             <span slot="title">Poem</span>
           </el-menu-item>
 
-          <el-submenu index="3">
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-location"/>
               <span slot="title">Navigator One</span>
             </template>
             <el-menu-item-group>
               <span slot="title">Group One</span>
-              <el-menu-item index="1-1">item one</el-menu-item>
-              <el-menu-item index="1-2">item two</el-menu-item>
+              <el-menu-item index="2-1">item one</el-menu-item>
+              <el-menu-item index="2-2">item two</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
+              <el-menu-item index="2-3">item three</el-menu-item>
             </el-menu-item-group>
-            <el-submenu index="1-4">
+            <el-submenu index="2-4">
               <span slot="title">item four</span>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
+              <el-menu-item index="2-4-1">item one</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-menu-item index="4">
+          <el-menu-item index="3">
             <i class="el-icon-menu"/>
             <span slot="title">Navigator Two</span>
           </el-menu-item>
-          <el-menu-item index="5" disabled>
+          <el-menu-item index="4" disabled>
             <i class="el-icon-document"/>
             <span slot="title">Navigator Three</span>
           </el-menu-item>
-          <el-menu-item index="6">
+          <el-menu-item index="5">
             <i class="el-icon-setting"/>
             <span slot="title">Settings</span>
           </el-menu-item>
         </el-menu>
       </el-scrollbar>
-      <div class="v-nav-menu__under">
 
-      </div>
+      <style id="styles">
+        :root {
+          --navmenu-collapse: {{ getNavMenu.collapse }}
+        }
+      </style>
     </div>
 </template>
 
@@ -58,7 +67,7 @@
         name: "v-nav-menu",
         computed: {
             ...mapGetters({
-                getIsCollapse: 'menu/getIsCollapse'
+                getNavMenu: 'menu/getNavMenu'
             })
         },
         data() {
@@ -93,6 +102,10 @@
     &__scrollbar {
       height: 100%;
       border-right: 1px solid var(--app-border-menu);
+
+      .el-scrollbar__bar.is-horizontal {
+        display: none;
+      }
     }
 
     &__container {
@@ -108,17 +121,12 @@
         &:hover, &:focus  {
           background-color: initial;
         }
+
         .logo__img {
           height: 34px;
         }
       }
 
-    }
-
-    &__under {
-      width: 100%;
-      height: 100%;
-      border-right: 1px solid var(--app-border-menu);
     }
 
     // Default style element-ui
@@ -135,9 +143,9 @@
       padding-left: 40px !important;
     }
     .el-menu--collapse {
-      width: 54px;
+      width: var(--navmenu-collapse);
     }
-/*    //line active
+/*    // line navMenu active
     .el-menu--inline {
       width: 200px;
       border-right: 1px solid var(--app-border-menu);
@@ -163,8 +171,8 @@
   }
   .el-menu--horizontal>.el-menu-item:not(.is-disabled), .el-menu-item, .el-submenu__title {
     color: var(--app-text-color);
-    /*transition: border-color .3s,background-color .3s,color .3s;*/
-    transition: none;
+    transition: border-color .3s,background-color .3s,color .3s;
+    /*transition: none;*/
 
     &:hover {
       background: var(--app-background-hover);

@@ -1,59 +1,38 @@
 <template>
   <div class="container">
-    <h1> portal</h1>
-    <el-button type="primary" plain>Adib</el-button>
-    <img src="~assets/images/man.gif" alt="Man">
-    <div id="app">
-      <h2>list:</h2>
-      <el-scrollbar wrap-class="list" wrap-style="color: red;" view-style="font-weight: bold;" view-class="view-box" :noresize="true" :native="false">
-        <div v-for="value in num" :key="value">
-          {{value}}
-        </div>
-      </el-scrollbar>
-    </div>
+    <h3 class="container__title" >Education ortal</h3>
 
+    <img class="container__image" src="~assets/images/man.gif" alt="Man">
+    <el-button type="primary" plain>Adib</el-button>
   </div>
 </template>
 
 <script>
 
 export default {
-  data() {
-    return {
-      num: 30
-    }
-  },
     components: {
 
     },
+    data() {
+        return {
 
+        }
+    },
 }
 </script>
 
 <style lang="scss">
 .container {
-  font-size: $g-font-family-default;
-  img {
-    width: 80%;
-    display: none;
+  padding: 15px;
+  &__title {
+    margin-bottom: 15px;
   }
-}
-#app {
-  height: 300px;
-  overflow: hidden;
-  max-width: 300px;
-  background: #fff;
-}
-.el-scrollbar__thumb {
-  display: block;
-  background: rgba(var(--app-text-color), 0.5);
-  &:hover {
-    background: var(--app-text-color);
+  &__image {
+    width: 250px;
+    display: block;
+    margin: 15px;
   }
-}
 
-.list {
-  max-height: 200px;
+  margin-bottom: 700px;
 }
-
 </style>
