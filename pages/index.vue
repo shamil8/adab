@@ -46,9 +46,9 @@ export default {
 }
 .el-scrollbar__thumb {
   display: block;
-  background: #ffcc33;
+  background: rgba(var(--app-text-color), 0.5);
   &:hover {
-    background: #ffcc33;
+    background: var(--app-text-color);
   }
 }
 

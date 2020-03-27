@@ -1,48 +1,50 @@
 <template>
     <div class="v-nav-menu" :style="[getIsCollapse ? {'width': '54px'} : {'width': '200px'}]">
-      <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
+      <el-scrollbar class="v-nav-menu__scrollbar" :native="false">
+        <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
 
-        <el-menu-item id="logo">
-          <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
-          <span>Adab</span>
-        </el-menu-item>
+          <el-menu-item id="logo">
+            <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
+            <span>Adab</span>
+          </el-menu-item>
 
-        <el-menu-item index="2">
-          <i class="el-icon-collection"/>
-          <span slot="title">Poem</span>
-        </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-collection"/>
+            <span slot="title">Poem</span>
+          </el-menu-item>
 
-        <el-submenu index="3">
-          <template slot="title">
-            <i class="el-icon-location"/>
-            <span slot="title">Navigator One</span>
-          </template>
-          <el-menu-item-group>
-            <span slot="title">Group One</span>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="1-4">
-            <span slot="title">item four</span>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-location"/>
+              <span slot="title">Navigator One</span>
+            </template>
+            <el-menu-item-group>
+              <span slot="title">Group One</span>
+              <el-menu-item index="1-1">item one</el-menu-item>
+              <el-menu-item index="1-2">item two</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="Group Two">
+              <el-menu-item index="1-3">item three</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="1-4">
+              <span slot="title">item four</span>
+              <el-menu-item index="1-4-1">item one</el-menu-item>
+            </el-submenu>
           </el-submenu>
-        </el-submenu>
-        <el-menu-item index="4">
-          <i class="el-icon-menu"/>
-          <span slot="title">Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="5" disabled>
-          <i class="el-icon-document"/>
-          <span slot="title">Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="6">
-          <i class="el-icon-setting"/>
-          <span slot="title">Settings</span>
-        </el-menu-item>
-      </el-menu>
+          <el-menu-item index="4">
+            <i class="el-icon-menu"/>
+            <span slot="title">Navigator Two</span>
+          </el-menu-item>
+          <el-menu-item index="5" disabled>
+            <i class="el-icon-document"/>
+            <span slot="title">Navigator Three</span>
+          </el-menu-item>
+          <el-menu-item index="6">
+            <i class="el-icon-setting"/>
+            <span slot="title">Settings</span>
+          </el-menu-item>
+        </el-menu>
+      </el-scrollbar>
       <div class="v-nav-menu__under">
 
       </div>
@@ -88,8 +90,15 @@
     z-index: 1001;
     overflow: hidden;
 
-    &__container {
+    &__scrollbar {
+      height: 100%;
       border-right: 1px solid var(--app-border-menu);
+    }
+
+    &__container {
+      overflow: hidden;
+      border-right: none;
+      height: 100%;
       background-color: inherit;
 
       #logo {
@@ -113,6 +122,12 @@
     }
 
     // Default style element-ui
+    .el-scrollbar__wrap { //el scrollbar element-ui
+      overflow-x: inherit;
+      overflow-y: scroll;
+    }
+
+
     .el-menu-item, .el-submenu__title, .el-tooltip {  //size
       padding: 0 13px !important;
     }
@@ -122,7 +137,7 @@
     .el-menu--collapse {
       width: 54px;
     }
-
+/*    //line active
     .el-menu--inline {
       width: 200px;
       border-right: 1px solid var(--app-border-menu);
@@ -138,6 +153,8 @@
         width: 54px;
       }
     }
+
+    */
   }
 
   // Default style element-ui
