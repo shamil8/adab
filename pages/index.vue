@@ -33,11 +33,15 @@ export default {
 <style lang="scss">
 .container {
   font-size: $g-font-family-default;
+  img {
+    width: 80%;
+    display: none;
+  }
 }
 #app {
   height: 300px;
   overflow: hidden;
-  width: 300px;
+  max-width: 300px;
   background: #fff;
 }
 .el-scrollbar__thumb {
@@ -47,7 +51,6 @@ export default {
     background: #ffcc33;
   }
 }
-/*展示列表的区域，超过200px出现滚动条*/
 
 .list {
   max-height: 200px;

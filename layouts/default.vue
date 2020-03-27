@@ -32,6 +32,9 @@
 *:after {
   box-sizing: border-box;
   margin: 0;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
 }
 
 html {
@@ -42,4 +45,5 @@ body {
                 var(--app-background-second) 0.3%, var(--app-background) 90.2% ) no-repeat fixed;
   height: 100%;
 }
+
 </style>

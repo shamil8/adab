@@ -53,8 +53,15 @@
 <style lang="scss">
   .v-top-bar {
     &__container {
+      height: 60px;
+
+
       &.el-menu.el-menu--horizontal {
-        border-bottom: 1px solid var(--app-border-menu)
+        border-bottom: 1px solid var(--app-border-menu);
+
+        .is-active {
+          border-bottom: 1px solid $g-color-blue;
+        }
       }
 
       &--nav {
@@ -71,6 +78,10 @@
         &__day-night {
           margin-top: 5px;
           margin-right: 25px;
+
+          @media (max-width: 768px) {
+            margin-right: 14px;
+          }
         }
       }
     }

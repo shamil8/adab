@@ -2,8 +2,8 @@
     <div class="v-nav-menu" :style="[getIsCollapse ? {'width': '54px'} : {'width': '200px'}]">
       <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
 
-        <el-menu-item id="logo" index="1">
-          <i class="el-icon-video-camera-solid"/>
+        <el-menu-item id="logo">
+          <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
           <span>Adab</span>
         </el-menu-item>
 
@@ -43,6 +43,9 @@
           <span slot="title">Settings</span>
         </el-menu-item>
       </el-menu>
+      <div class="v-nav-menu__under">
+
+      </div>
     </div>
 </template>
 
@@ -77,7 +80,6 @@
 <style lang="scss">
   .v-nav-menu {
     background-color: var(--app-background);
-    border-right: 1px solid var(--app-border-menu);
     position: fixed;
     font-size: 0;
     top: 0;
@@ -87,24 +89,31 @@
     overflow: hidden;
 
     &__container {
-      border-right: none;
+      border-right: 1px solid var(--app-border-menu);
       background-color: inherit;
-      margin-bottom: 20px;
 
       #logo {
+        height: 60px;
         font-size: 32px;
-        color: var(--app-logo-hover);
+        color: var(--app-logo-text);
         &:hover, &:focus  {
           background-color: initial;
         }
-
-        i {
-          color: var(--app-logo-icon);
+        .logo__img {
+          height: 34px;
         }
       }
 
     }
-    .el-menu-item, .el-submenu__title, .el-tooltip {
+
+    &__under {
+      width: 100%;
+      height: 100%;
+      border-right: 1px solid var(--app-border-menu);
+    }
+
+    // Default style element-ui
+    .el-menu-item, .el-submenu__title, .el-tooltip {  //size
       padding: 0 13px !important;
     }
     .el-submenu .el-menu-item {
@@ -112,6 +121,22 @@
     }
     .el-menu--collapse {
       width: 54px;
+    }
+
+    .el-menu--inline {
+      width: 200px;
+      border-right: 1px solid var(--app-border-menu);
+    }
+    .el-menu {  //line active
+
+      .el-menu-item.is-active {
+        width: 200px;
+        border-right: 1px solid $g-color-blue;
+      }
+
+      &--collapse .el-menu-item.is-active {
+        width: 54px;
+      }
     }
   }
 
@@ -138,10 +163,10 @@
     }
 
     &.is-active, &.is-active i {
-      color: var(--app-text-color-active);
+      color: $g-color-blue;
       &:hover, &:focus {
         background: none;
-        color: var(--app-text-color-active);
+        color: $g-color-blue;
       }
     }
   }
