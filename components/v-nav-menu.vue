@@ -3,18 +3,18 @@
       <el-menu default-active="2" class="v-nav-menu__container" @open="handleOpen" @close="handleClose" :collapse="getIsCollapse">
 
         <el-menu-item id="logo" index="1">
-          <i class="el-icon-video-camera-solid"></i>
+          <i class="el-icon-video-camera-solid"/>
           <span>Adab</span>
         </el-menu-item>
 
         <el-menu-item index="2">
-          <i class="el-icon-collection"></i>
+          <i class="el-icon-collection"/>
           <span slot="title">Poem</span>
         </el-menu-item>
 
         <el-submenu index="3">
           <template slot="title">
-            <i class="el-icon-location"></i>
+            <i class="el-icon-location"/>
             <span slot="title">Navigator One</span>
           </template>
           <el-menu-item-group>
@@ -31,15 +31,15 @@
           </el-submenu>
         </el-submenu>
         <el-menu-item index="4">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-menu"/>
           <span slot="title">Navigator Two</span>
         </el-menu-item>
         <el-menu-item index="5" disabled>
-          <i class="el-icon-document"></i>
+          <i class="el-icon-document"/>
           <span slot="title">Navigator Three</span>
         </el-menu-item>
         <el-menu-item index="6">
-          <i class="el-icon-setting"></i>
+          <i class="el-icon-setting"/>
           <span slot="title">Settings</span>
         </el-menu-item>
       </el-menu>
@@ -77,7 +77,7 @@
 <style lang="scss">
   .v-nav-menu {
     background-color: var(--app-background);
-    border-right: 1px solid $g-color-gray-100;
+    border-right: 1px solid var(--app-border-menu);
     position: fixed;
     font-size: 0;
     top: 0;
@@ -95,7 +95,7 @@
         font-size: 32px;
         color: var(--app-logo-hover);
         &:hover, &:focus  {
-          background-color: inherit;
+          background-color: initial;
         }
 
         i {
@@ -104,7 +104,15 @@
       }
 
     }
-
+    .el-menu-item, .el-submenu__title, .el-tooltip {
+      padding: 0 13px !important;
+    }
+    .el-submenu .el-menu-item {
+      padding-left: 40px !important;
+    }
+    .el-menu--collapse {
+      width: 54px;
+    }
   }
 
   // Default style element-ui
@@ -117,12 +125,12 @@
     transition: none;
 
     &:hover {
-      background: var(--app-background-hover) !important;
+      background: var(--app-background-hover);
       color: var(--app-text-color);
     }
     &:focus {
-      background: var(--app-background-focus) !important;
-      color: var(--app-text-color) !important;
+      background: var(--app-background-focus);
+      color: var(--app-text-color);
     }
 
     i {
@@ -131,6 +139,10 @@
 
     &.is-active, &.is-active i {
       color: var(--app-text-color-active);
+      &:hover, &:focus {
+        background: none;
+        color: var(--app-text-color-active);
+      }
     }
   }
   //End element-ui

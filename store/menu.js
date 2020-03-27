@@ -1,5 +1,5 @@
 export const state = () => ({
-  isCollapse: false
+  isCollapse: true  // true - min-menu / false - standard-menu
 })
 
 export const mutations = {

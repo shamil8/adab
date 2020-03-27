@@ -5,6 +5,7 @@
 :root {
   // background colors
   --app-background: #FFFFFF;
+  --app-background-second: #FFFFFF;
   --app-background-hover: #D9EEFB;
   --app-background-focus: rgba(0, 0, 0, 0.1);
 
@@ -15,11 +16,15 @@
   // Logo colors
   --app-logo-icon: #ffcc33;
   --app-logo-hover: #222326;
+
+  //border colors
+  --app-border-menu: #e6e6e6;
 }
 
 [theme="dark"] {
   // background colors
   --app-background: #222D32;
+  --app-background-second: rgba(74,98,110,1);
   --app-background-hover: rgba(0, 0, 0, 0.1);
   --app-background-focus: rgba(0, 0, 0, 0.1);
 
@@ -30,6 +35,9 @@
   // Logo colors
   --app-logo-icon: #ffcc33;
   --app-logo-hover: #dcdcdc;
+
+  //border colors
+  --app-border-menu: #ffcc33;
 }
 
 [theme="sepia"] {
