@@ -3,7 +3,7 @@ export const state = () => ({
     isCollapse: true,  // true - collapse-menu / false - normal-menu
     collapse: '54px',
     normal: '200px',
-    defaultActive: '1', // index='2-4-1'
+    // defaultActive: 'poems',
   }
 
 })

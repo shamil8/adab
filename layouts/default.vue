@@ -2,8 +2,11 @@
     <div>
       <vTopBar />
       <vNavMenu />
-      <nuxt :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]"
-      />
+      <main>
+        <div class="container" :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]">
+          <nuxt />
+        </div>
+      </main>
     </div>
 </template>
 
@@ -26,7 +29,8 @@
 </script>
 
 <style lang="scss">
-  body {
-
+  .container {
+    min-width: 346px;
+    padding: 15px;
   }
 </style>

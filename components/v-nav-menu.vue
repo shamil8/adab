@@ -3,21 +3,24 @@
       <el-scrollbar class="v-nav-menu__scrollbar" :native="false">
         <el-menu
           class="v-nav-menu__container"
-          :default-active="getNavMenu.defaultActive"
+          :default-active="$route.name"
           :collapse="getNavMenu.isCollapse"
           :collapse-transition="false"
           @open="handleOpen"
           @close="handleClose"
         >
-          <el-menu-item id="logo">
-            <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
-            <span>Adab</span>
+          <nuxt-link no-prefetch to="poems">
+            <el-menu-item id="logo">
+              <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
+              <span>Adab</span>
+            </el-menu-item>
+          </nuxt-link>
+          <nuxt-link no-prefetch to="poems">
+          <el-menu-item index="poems">
+              <i class="el-icon-collection"/>
+              <span slot="title">Poem</span>
           </el-menu-item>
-
-          <el-menu-item index="1">
-            <i class="el-icon-collection"/>
-            <span slot="title">Poem</span>
-          </el-menu-item>
+          </nuxt-link>
 
           <el-submenu index="2">
             <template slot="title">
@@ -37,18 +40,22 @@
               <el-menu-item index="2-4-1">item one</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-menu-item index="3">
-            <i class="el-icon-menu"/>
-            <span slot="title">Navigator Two</span>
-          </el-menu-item>
+          <nuxt-link to="/">
+            <el-menu-item index="index">
+              <i class="el-icon-menu"/>
+              <span slot="title">Home</span>
+            </el-menu-item>
+          </nuxt-link>
           <el-menu-item index="4" disabled>
             <i class="el-icon-document"/>
             <span slot="title">Navigator Three</span>
           </el-menu-item>
-          <el-menu-item index="5">
-            <i class="el-icon-setting"/>
-            <span slot="title">Settings</span>
+          <nuxt-link to="settings">
+          <el-menu-item index="settings">
+              <i class="el-icon-setting"/>
+              <span slot="title">Settings</span>
           </el-menu-item>
+          </nuxt-link>
         </el-menu>
       </el-scrollbar>
 
@@ -70,12 +77,8 @@
                 getNavMenu: 'menu/getNavMenu'
             })
         },
-        data() {
-            return {
-
-            }
-        },
         mounted() {
+          console.log(this.$route.name)
         },
         methods: {
             handleOpen(key, keyPath) {

@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-
+      
     }
   },
 }
@@ -34,8 +34,6 @@ export default {
 
 <style lang="scss">
 .main {
-  min-width: 346px;
-  padding: 15px;
 
   &__title {
     margin-bottom: 15px;
@@ -45,7 +43,6 @@ export default {
     width: 100%;
 
   }
-
 
   &__image {
     width: 250px;

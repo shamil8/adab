@@ -13,7 +13,7 @@
       <img class="v-user-popover__container--image" src="../assets/images/avatar.png" alt="Img">
       <h3 class="v-user-popover__container--name">Shamil Kurbonov</h3>
       <cDayNightToggle class="v-user-popover__container--day-night"/>
-      <el-button><i class="el-icon-setting"/> Settings</el-button>
+      <nuxt-link to="settings"><el-button><i class="el-icon-setting"/> Settings</el-button></nuxt-link>
       <el-button><i class="el-icon-pear"/>Log out</el-button>
     </div>
 
