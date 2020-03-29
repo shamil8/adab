@@ -1,8 +1,9 @@
 <template>
     <div>
       <vTopBar />
-      <vNavMenu/>
-      <nuxt :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]"/>
+      <vNavMenu />
+      <nuxt :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]"
+      />
     </div>
 </template>
 

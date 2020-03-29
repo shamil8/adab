@@ -12,15 +12,18 @@
         <el-menu-item @click="toggleNavMenu" class="v-top-bar__container--nav">
           <i v-if="getNavMenu.isCollapse" class="el-icon-d-arrow-right"/>
           <i v-else class="el-icon-d-arrow-left"/>
-
         </el-menu-item>
 
         <el-menu-item index="1">Center</el-menu-item>
         <el-menu-item index="2">Orders</el-menu-item>
 
-        <div class="v-top-bar__container--right right-container">
-          <cDayNightToggle class="right-container__day-night"/>
+        <vSearch
+          v-if="getScreenName.large === getWindow.type || getScreenName.medium === getWindow.type"
+          class="v-top-bar__container--search"
+        />
 
+        <div class="v-top-bar__container--right right-container">
+          <vUserPopover />
         </div>
 
 
@@ -30,20 +33,25 @@
 
 <script>
     import { mapMutations, mapGetters } from 'vuex'
-    import cDayNightToggle from '../components/c-day-night-toggle'
+    import vUserPopover from './v-user-popover'
+    import vSearch from './v-search'
+
     export default {
         name: "v-top-bar",
         components: {
-            cDayNightToggle
+          vUserPopover,
+          vSearch
         },
         data() {
             return {
-                activeIndex: '1'
+              activeIndex: '1'
             };
         },
         computed: {
             ...mapGetters({
-                getNavMenu: 'menu/getNavMenu'
+              getNavMenu: 'menu/getNavMenu',
+              getWindow: 'default/getWindow',
+              getScreenName: 'default/getScreenName'
             })
         },
         methods: {
@@ -59,6 +67,8 @@
 
 <style lang="scss">
   .v-top-bar {
+    min-width: 346px;
+
     &__container {
       height: 60px;
 
@@ -76,18 +86,21 @@
         }
       }
 
+      &--search {
+        margin-top: 10px;
+        margin-left: 15px;
+      }
+
       &--right, .right-container {  // Right container
         float: right;
         height: 100%;
+        margin-top: 10px;
+        margin-right: 25px;
 
-        &__day-night {
-          margin-top: 5px;
-          margin-right: 25px;
-
-          @media (max-width: 768px) {
-            margin-right: 14px;
-          }
+        @media (max-width: 768px) {
+          margin-right: 14px;
         }
+
       }
     }
   }
