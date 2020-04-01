@@ -9,16 +9,35 @@
           @open="handleOpen"
           @close="handleClose"
         >
-          <nuxt-link no-prefetch to="poems">
+          <nuxt-link no-prefetch :to="{name: 'poems'}">
             <el-menu-item id="logo">
               <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
               <span>Adab</span>
             </el-menu-item>
           </nuxt-link>
-          <nuxt-link no-prefetch to="poems">
+          <nuxt-link :to="{name: 'poems'}">
           <el-menu-item index="poems">
               <i class="el-icon-collection"/>
               <span slot="title">Poem</span>
+          </el-menu-item>
+          </nuxt-link>
+
+          <nuxt-link to="/">
+            <el-menu-item index="index">
+              <i class="el-icon-menu"/>
+              <span slot="title">Home</span>
+            </el-menu-item>
+          </nuxt-link>
+
+          <el-menu-item index="4" disabled>
+            <i class="el-icon-document"/>
+            <span slot="title">Navigator Three</span>
+          </el-menu-item>
+
+          <nuxt-link :to="{name: 'settings'}">
+          <el-menu-item index="settings">
+              <i class="el-icon-setting"/>
+              <span slot="title">Settings</span>
           </el-menu-item>
           </nuxt-link>
 
@@ -40,22 +59,6 @@
               <el-menu-item index="2-4-1">item one</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <nuxt-link to="/">
-            <el-menu-item index="index">
-              <i class="el-icon-menu"/>
-              <span slot="title">Home</span>
-            </el-menu-item>
-          </nuxt-link>
-          <el-menu-item index="4" disabled>
-            <i class="el-icon-document"/>
-            <span slot="title">Navigator Three</span>
-          </el-menu-item>
-          <nuxt-link to="settings">
-          <el-menu-item index="settings">
-              <i class="el-icon-setting"/>
-              <span slot="title">Settings</span>
-          </el-menu-item>
-          </nuxt-link>
         </el-menu>
       </el-scrollbar>
 
@@ -68,27 +71,27 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+  import { mapGetters } from 'vuex'
 
-    export default {
-        name: "v-nav-menu",
-        computed: {
-            ...mapGetters({
-                getNavMenu: 'menu/getNavMenu'
-            })
-        },
-        mounted() {
-          console.log(this.$route.name)
-        },
-        methods: {
-            handleOpen(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            handleClose(key, keyPath) {
-                console.log(key, keyPath);
-            }
-        }
+  export default {
+    name: "v-nav-menu",
+    computed: {
+      ...mapGetters({
+        getNavMenu: 'menu/getNavMenu'
+      })
+    },
+    mounted() {
+      console.log(this.$route.name)
+    },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
     }
+  }
 </script>
 
 <style lang="scss">

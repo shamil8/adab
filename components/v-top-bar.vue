@@ -22,8 +22,11 @@
           class="v-top-bar__container--search"
         />
 
-        <div class="v-top-bar__container--right right-container">
-          <vUserPopover />
+        <div  class="v-top-bar__container--right right-container">
+          <nuxt-link v-if="!hasToken" to="/login">
+            <el-menu-item>Login</el-menu-item>
+          </nuxt-link>
+          <vUserPopover  v-else/>
         </div>
 
 
@@ -32,37 +35,40 @@
 </template>
 
 <script>
-    import { mapMutations, mapGetters } from 'vuex'
-    import vUserPopover from './v-user-popover'
-    import vSearch from './v-search'
+  import { mapMutations, mapGetters } from 'vuex'
+  import vUserPopover from './v-user-popover'
+  import vSearch from './v-search'
 
-    export default {
-        name: "v-top-bar",
-        components: {
-          vUserPopover,
-          vSearch
-        },
-        data() {
-            return {
-              activeIndex: '1'
-            };
-        },
-        computed: {
-            ...mapGetters({
-              getNavMenu: 'menu/getNavMenu',
-              getWindow: 'default/getWindow',
-              getScreenName: 'default/getScreenName'
-            })
-        },
-        methods: {
-            handleSelect(key, keyPath) {
-                console.log(key, keyPath);
-            },
-            ...mapMutations({
-                toggleNavMenu: 'menu/toggleNavMenu'
-            })
-        }
+  export default {
+    name: "v-top-bar",
+    components: {
+      vUserPopover,
+      vSearch
+    },
+    data() {
+      return {
+        activeIndex: '1'
+      }
+    },
+    computed: {
+      ...mapGetters({
+        getNavMenu: 'menu/getNavMenu',
+        getWindow: 'default/getWindow',
+        getScreenName: 'default/getScreenName'
+      }),
+      hasToken() {
+        return this.$store.getters.hasToken
+      }
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      ...mapMutations({
+        toggleNavMenu: 'menu/toggleNavMenu'
+      })
     }
+  }
 </script>
 
 <style lang="scss">

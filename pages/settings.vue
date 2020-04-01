@@ -6,6 +6,7 @@
 
 <script>
   export default {
+    middleware: ['auth'],
     name: "settings",
     components: {
 

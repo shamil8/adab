@@ -12,18 +12,19 @@
 <script>
   export default {
     name: "index.vue",
-    async asyncData({$axios}) {
-      const poems = await $axios.$get('https://jsonplaceholder.typicode.com/users')
-      return {poems}
+    async fetch({store}) {
+      if (store.getters['poems/poems'].length === 0) {
+        await store.dispatch('poems/fetch')
+      }
     },
-    data() {
-      return {
-
+    computed: {
+      poems() {
+        return this.$store.getters['poems/poems']
       }
     },
     methods: {
       showPoem(poem) {
-        this.$router.push('/poems/' + poem.id)
+        this.$router.push({ name: 'poems-id', params: { id: poem.id } })
       }
     }
   }
