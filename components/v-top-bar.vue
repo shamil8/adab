@@ -22,13 +22,11 @@
           class="v-top-bar__container--search"
         />
 
-        <div  class="v-top-bar__container--right right-container">
-          <nuxt-link v-if="!hasToken" to="/login">
-            <el-menu-item>Login</el-menu-item>
-          </nuxt-link>
-          <vUserPopover  v-else/>
-        </div>
+        <el-menu-item v-if="!hasToken" class="v-top-bar__container--login" index="login" >Login</el-menu-item>
 
+        <div v-else class="v-top-bar__container--right right-container">
+          <vUserPopover />
+        </div>
 
       </el-menu>
     </div>
@@ -61,8 +59,11 @@
       }
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      handleSelect(index) {
+        this.$router.push({
+          name: index,
+        });
+        console.log(index)
       },
       ...mapMutations({
         toggleNavMenu: 'menu/toggleNavMenu'
@@ -107,6 +108,15 @@
           margin-right: 14px;
         }
 
+      }
+
+      &--login {
+        float: right !important;
+        margin-right: 25px !important;
+
+        @media (max-width: 768px) {
+          margin-right: 14px;
+        }
       }
     }
   }
