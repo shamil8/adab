@@ -3,7 +3,7 @@
       <vTopBar />
       <vNavMenu />
       <main>
-        <div class="container" :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]">
+        <div class="container" :style="{'margin-left': getNavMenu.isCollapse ? getNavMenu.collapse : getNavMenu.normal}">
           <nuxt />
         </div>
       </main>

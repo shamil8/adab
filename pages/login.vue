@@ -107,7 +107,7 @@
 
 <style scoped>
   .box-card {
-    width: 480px;
+    width: 370px;
     margin: 25px auto;
 
   }

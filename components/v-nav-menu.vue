@@ -1,45 +1,36 @@
 <template>
-    <div class="v-nav-menu" :style="[getNavMenu.isCollapse ? {'width': getNavMenu.collapse} : {'width': getNavMenu.normal}]">
+    <div class="v-nav-menu" :style="{'width': getNavMenu.isCollapse ? getNavMenu.collapse : getNavMenu.normal}">
       <el-scrollbar class="v-nav-menu__scrollbar" :native="false">
         <el-menu
           class="v-nav-menu__container"
           :default-active="$route.name"
           :collapse="getNavMenu.isCollapse"
           :collapse-transition="false"
-          @open="handleOpen"
-          @close="handleClose"
+          @select="handleSelect"
         >
-          <nuxt-link no-prefetch :to="{name: 'poems'}">
-            <el-menu-item id="logo">
-              <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
-              <span>Adab</span>
-            </el-menu-item>
-          </nuxt-link>
-          <nuxt-link :to="{name: 'poems'}">
-          <el-menu-item index="poems">
-              <i class="el-icon-collection"/>
-              <span slot="title">Poem</span>
+          <el-menu-item id="logo" index="poems">
+            <img class="logo__img" src="../assets/images/adab-logo.svg" alt="A">
+            <span>Adab</span>
           </el-menu-item>
-          </nuxt-link>
+          <el-menu-item index="poems">
+            <i class="el-icon-collection"/>
+            <span slot="title">Poem</span>
+          </el-menu-item>
 
-          <nuxt-link to="/">
-            <el-menu-item index="index">
-              <i class="el-icon-menu"/>
-              <span slot="title">Home</span>
-            </el-menu-item>
-          </nuxt-link>
+          <el-menu-item index="index">
+            <i class="el-icon-menu"/>
+            <span slot="title">Home</span>
+          </el-menu-item>
 
           <el-menu-item index="4" disabled>
             <i class="el-icon-document"/>
             <span slot="title">Navigator Three</span>
           </el-menu-item>
 
-          <nuxt-link :to="{name: 'settings'}">
           <el-menu-item index="settings">
-              <i class="el-icon-setting"/>
-              <span slot="title">Settings</span>
+            <i class="el-icon-setting"/>
+            <span slot="title">Settings</span>
           </el-menu-item>
-          </nuxt-link>
 
           <el-submenu index="2">
             <template slot="title">
@@ -80,16 +71,11 @@
         getNavMenu: 'menu/getNavMenu'
       })
     },
-    mounted() {
-      console.log(this.$route.name)
-    },
+    mounted() {},
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+      handleSelect(index) {
+        this.$router.push({name: index})
       },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
     }
   }
 </script>
@@ -160,7 +146,7 @@
 
       .el-menu-item.is-active {
         width: 200px;
-        border-right: 1px solid $g-color-blue;
+        border-right: 1px solid $blue;
       }
 
       &--collapse .el-menu-item.is-active {
@@ -194,10 +180,10 @@
     }
 
     &.is-active, &.is-active i {
-      color: $g-color-blue;
+      color: $blue;
       &:hover, &:focus {
         background: none;
-        color: $g-color-blue;
+        color: $blue;
       }
     }
   }

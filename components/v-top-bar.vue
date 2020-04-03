@@ -1,6 +1,6 @@
 <template>
     <div class="v-top-bar"
-         :style="[getNavMenu.isCollapse ? {'margin-left': getNavMenu.collapse} : {'margin-left': getNavMenu.normal}]"
+         :style="{'margin-left': getNavMenu.isCollapse ? getNavMenu.collapse : getNavMenu.normal}"
     >
       <el-menu
         class="v-top-bar__container"
@@ -60,10 +60,7 @@
     },
     methods: {
       handleSelect(index) {
-        this.$router.push({
-          name: index,
-        });
-        console.log(index)
+        this.$router.push({name: index})
       },
       ...mapMutations({
         toggleNavMenu: 'menu/toggleNavMenu'
@@ -83,7 +80,7 @@
         border-bottom: 1px solid var(--app-border-menu);
 
         .is-active {
-          border-bottom: 1px solid $g-color-blue;
+          border-bottom: 1px solid $blue;
         }
       }
 

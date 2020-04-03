@@ -60,7 +60,7 @@
         border: 1px solid var(--app-border-menu);
         &:hover, &:focus {
           transition: 0.25s;
-          border: 1px solid $g-color-blue;
+          border: 1px solid $blue;
         }
       }
     }

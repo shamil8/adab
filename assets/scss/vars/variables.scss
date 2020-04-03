@@ -1,0 +1,42 @@
+// Colors
+$white: #FFFFFF;
+$blue: #409EFF;
+$blue-100: #D9EEFB;
+$dark: #222D32;
+$dark-blue: #4a626e;
+$grey-100: #e6e6e6;
+$red: #E71E1E;
+$yellow: #ffcc33;
+
+$g-font-size-base: 1rem;  // I don't use these styles
+$g-font-size-base-px: 16px;
+$g-font-size-light: ($g-font-size-base * 0.85);
+$g-font-size-bigger: ($g-font-size-base * 1.1818);
+$g-font-size-big: ($g-font-size-base * 1.47625);
+
+$g-font-family-default: "PT Sans", sans-serif;
+
+// Ширина планшета 1280px
+$g-screen-width-tablet: 1280px;
+
+
+// Функции
+
+// Вычисление доли от общего значения в процентах
+@function percent($part, $total) {
+  @return $part * 100% / $total;
+}
+
+// Миксин для указания типа блока - flex
+@mixin g-mixin-display-flex {
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+// Миксин для обрезания текст с заменой на точки обрезанного текста
+@mixin g-mixin-text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
