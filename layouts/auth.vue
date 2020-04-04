@@ -29,23 +29,30 @@
       text-align: center;
 
       margin-top: 30px;
-
     }
   }
 
   .form-container {
-
-    input, button {
-      margin-bottom: 15px;
+    input {
       width: 100%;
+      color: $grey;
+    }
+
+    button {
+      width: 100%;
+      margin-bottom: 15px;
     }
 
     .form-group {
       text-align: left;
       margin-bottom: 15px;
-      a {
-        color: $dark;
 
+      &.forgetpwd {
+        margin-bottom: 22px;
+      }
+
+      a {
+        color: $grey;
         &:hover {
           transition: 0.2s;
           color: $blue;
@@ -55,6 +62,10 @@
           color: $blue;
         }
       }
+    }
+
+    .el-form-item__content {  // It's element UI
+      margin-bottom: 5px;
     }
   }
 </style>

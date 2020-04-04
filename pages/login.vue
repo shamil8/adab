@@ -1,11 +1,17 @@
 <template>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="form-container">
-    <el-input placeholder="E-mail" type="text" v-model="ruleForm.login" autocomplete="off"/>
-    <el-input placeholder="Password" type="password" v-model="ruleForm.pass" autocomplete="off"/>
-    <div class="form-group">
+  <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="form-container">
+    <el-form-item prop="email">
+      <el-input placeholder="Email" type="email" v-model="loginForm.email" />
+    </el-form-item>
+
+    <el-form-item prop="password">
+      <el-input placeholder="Password" type="password" v-model="loginForm.password"/>
+    </el-form-item>
+
+    <div class="form-group forgetpwd">
       <nuxt-link to="forgetpwd">Forgot password?</nuxt-link>
     </div>
-    <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
+    <el-button type="primary" @click="submitForm('loginForm')">Login</el-button>
     <div class="form-group">
       Create new account?
       <nuxt-link class="register" to="register">Sign up!</nuxt-link>
@@ -18,59 +24,22 @@
       name: "login",
       layout: 'auth',
       data() {
-        let checkAge = (rule, value, callback) => {
-          if (!value) {
-            return callback(new Error('Please input the age'));
-          }
-          setTimeout(() => {
-            if (!Number.isInteger(value)) {
-              callback(new Error('Please input digits'));
-            } else {
-              if (value < 18) {
-                callback(new Error('Age must be greater than 18'));
-              } else {
-                callback();
-              }
-            }
-          }, 1000);
-        };
-        let validatePass = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('Please input the password'));
-          } else {
-            if (this.ruleForm.checkPass !== '') {
-              this.$refs.ruleForm.validateField('checkPass');
-            }
-            callback();
-          }
-        };
-        let validatePass2 = (rule, value, callback) => {
-          if (value === '') {
-            callback(new Error('Please input the password again'));
-          } else if (value !== this.ruleForm.pass) {
-            callback(new Error('Two inputs don\'t match!'));
-          } else {
-            callback();
-          }
-        };
         return {
-          ruleForm: {
-            pass: '',
-            checkPass: '',
-            age: ''
+          loginForm: {
+            email: '',
+            password: '',
           },
           rules: {
-            pass: [
-              { validator: validatePass, trigger: 'blur' }
+            email: [
+              { required: true, message: 'Please input email address', trigger: 'blur' },
+              { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
             ],
-            checkPass: [
-              { validator: validatePass2, trigger: 'blur' }
+            password: [
+              { required: true, message: 'Please enter your password', trigger: 'blur' },
+              { min: 6, message: 'Your password is too short!' },
             ],
-            age: [
-              { validator: checkAge, trigger: 'blur' }
-            ]
           }
-        };
+        }
       },
       methods: {
         submitForm(formName) {
@@ -79,10 +48,9 @@
               this.$store.dispatch('login')
               this.$router.push('/')
             } else {
-              console.log('error submit!!');
-              return false;
+              return false
             }
-          });
+          })
         }
       }
     }
