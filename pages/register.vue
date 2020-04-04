@@ -1,35 +1,22 @@
 <template>
-  <section>
-    <el-alert
-      v-if="$route.query.message"
-      title="Need login firs"
-      type="warning"
-    >
-    </el-alert>
-    <el-card class="box-card">
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-        <el-form-item label="Password" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item label="Confirm" prop="checkPass">
-          <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"/>
-        </el-form-item>
-        <el-form-item label="Age" prop="age">
-          <el-input v-model.number="ruleForm.age"/>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-          <el-button @click="resetForm('ruleForm')">Reset</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </section>
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="form-container">
+    <el-input placeholder="Name" type="text" v-model="ruleForm.login" autocomplete="off"/>
+    <el-input placeholder="E-mail" type="text" v-model="ruleForm.login" autocomplete="off"/>
+    <el-input  placeholder="Password" type="password" v-model="ruleForm.pass" autocomplete="off"/>
+    <el-input placeholder="Confirm password" type="password" v-model="ruleForm.checkPass" autocomplete="off"/>
+    <el-button type="primary" @click="submitForm('ruleForm')">Sign up</el-button>
+
+    <div class="form-group">
+      You have an account?
+      <nuxt-link class="register" to="login">Login!</nuxt-link>
+    </div>
+  </el-form>
 </template>
 
 <script>
   export default {
     name: "register",
-    layout: 'empty',
+    layout: 'auth',
     data() {
       var checkAge = (rule, value, callback) => {
         if (!value) {
@@ -89,7 +76,6 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('$router Home!')
             this.$store.dispatch('login')
             this.$router.push('/')
           } else {

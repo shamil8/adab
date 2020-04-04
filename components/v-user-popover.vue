@@ -85,13 +85,14 @@
       }
 
      }
+
+    .el-button {
+      background: var(--app-background);
+      color: var(--app-text-color);
+    }
   }
 
   // Default style element-ui
-  .el-button {
-    background: var(--app-background);
-    color: var(--app-text-color);
-  }
 
   .el-popover {
     border-color: var(--app-border-menu);

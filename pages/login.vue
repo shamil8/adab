@@ -1,37 +1,24 @@
 <template>
-    <section>
-      <el-alert
-        v-if="$route.query.message"
-        title="Need login firs"
-        type="warning"
-      >
-      </el-alert>
-      <el-card class="box-card">
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-          <el-form-item label="Password" prop="pass">
-            <el-input type="password" v-model="ruleForm.pass" autocomplete="off"/>
-          </el-form-item>
-          <el-form-item label="Confirm" prop="checkPass">
-            <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"/>
-          </el-form-item>
-          <el-form-item label="Age" prop="age">
-            <el-input v-model.number="ruleForm.age"/>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-            <el-button @click="resetForm('ruleForm')">Reset</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
-    </section>
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="120px" class="form-container">
+    <el-input placeholder="E-mail" type="text" v-model="ruleForm.login" autocomplete="off"/>
+    <el-input placeholder="Password" type="password" v-model="ruleForm.pass" autocomplete="off"/>
+    <div class="form-group">
+      <nuxt-link to="forgetpwd">Forgot password?</nuxt-link>
+    </div>
+    <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
+    <div class="form-group">
+      Create new account?
+      <nuxt-link class="register" to="register">Sign up!</nuxt-link>
+    </div>
+  </el-form>
 </template>
 
 <script>
     export default {
       name: "login",
-      layout: 'empty',
+      layout: 'auth',
       data() {
-        var checkAge = (rule, value, callback) => {
+        let checkAge = (rule, value, callback) => {
           if (!value) {
             return callback(new Error('Please input the age'));
           }
@@ -47,7 +34,7 @@
             }
           }, 1000);
         };
-        var validatePass = (rule, value, callback) => {
+        let validatePass = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('Please input the password'));
           } else {
@@ -57,7 +44,7 @@
             callback();
           }
         };
-        var validatePass2 = (rule, value, callback) => {
+        let validatePass2 = (rule, value, callback) => {
           if (value === '') {
             callback(new Error('Please input the password again'));
           } else if (value !== this.ruleForm.pass) {
@@ -89,7 +76,6 @@
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              alert('$router Home!')
               this.$store.dispatch('login')
               this.$router.push('/')
             } else {
@@ -97,18 +83,11 @@
               return false;
             }
           });
-        },
-        resetForm(formName) {
-          this.$refs[formName].resetFields();
         }
       }
     }
 </script>
 
-<style scoped>
-  .box-card {
-    width: 370px;
-    margin: 25px auto;
+<style lang="scss">
 
-  }
 </style>
