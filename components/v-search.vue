@@ -44,8 +44,8 @@
     },
     mounted() {
       this.handleResize()
+      window.removeEventListener('resize', this.handleResize)
     },
-
     destroyed() {
       window.removeEventListener('resize', this.handleResize)
     }
