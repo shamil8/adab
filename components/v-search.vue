@@ -43,7 +43,6 @@
       }
     },
     mounted() {
-      window.addEventListener('resize', this.handleResize)
       this.handleResize()
     },
 
