@@ -14,16 +14,16 @@
           <i v-else class="el-icon-d-arrow-left"/>
         </el-menu-item>
 
-        <el-menu-item index="1">Center</el-menu-item>
-        <el-menu-item index="2">Orders</el-menu-item>
+<!--        <el-menu-item index="1">Center</el-menu-item>-->
+<!--        <el-menu-item index="2">Orders</el-menu-item>-->
 
         <vSearch
           v-if="getScreenName.large === getWindow.type || getScreenName.medium === getWindow.type"
           class="v-top-bar__container--search"
         />
 
+<!--          <el-menu-item> <vLangSwitcher /> </el-menu-item>-->
         <el-menu-item v-if="!hasToken" class="v-top-bar__container--login" index="login" >Login</el-menu-item>
-
         <div v-else class="v-top-bar__container--right right-container">
           <vUserPopover />
         </div>
@@ -34,14 +34,16 @@
 
 <script>
   import { mapMutations, mapGetters } from 'vuex'
-  import vUserPopover from './v-user-popover'
-  import vSearch from './v-search'
+  import vUserPopover from '~/components/v-user-popover'
+  import vSearch from '~/components/v-search'
+  // import vLangSwitcher from '~/components/v-lang-switcher'
 
   export default {
     name: "v-top-bar",
     components: {
       vUserPopover,
-      vSearch
+      vSearch,
+      // vLangSwitcher
     },
     data() {
       return {
@@ -108,8 +110,14 @@
       }
 
       &--login {
+        /*display: flex;*/
         float: right !important;
         margin-right: 25px !important;
+
+        /*.el-menu-item {*/
+        /*  height: 60px;*/
+        /*  line-height: 60px;*/
+        /*}*/
 
         @media (max-width: 768px) {
           margin-right: 14px;

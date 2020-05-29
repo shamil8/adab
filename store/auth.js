@@ -1,6 +1,6 @@
 // https://github.com/cretueusebiu/laravel-nuxt/blob/master/client/store/auth.js
 import axios from 'axios'
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 // state
 export const state = () => ({

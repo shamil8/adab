@@ -1,5 +1,5 @@
-export default function ({store, redirect}) {
-  if(!store.getters.hasToken) {
-    redirect('/login?message=login')
+export default ({ store, redirect }) => {
+  if (!store.getters['auth/check']) {
+    return redirect('/login')
   }
 }

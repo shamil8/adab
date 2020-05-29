@@ -20,6 +20,8 @@
 </template>
 
 <script>
+    import axios from "../.nuxt/axios"
+
     export default {
       name: "login",
       layout: 'auth',
@@ -45,8 +47,26 @@
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              this.$store.dispatch('login')
-              this.$router.push('/')
+              let data
+              // Submit the form.
+              try {
+                alert(this.loginForm.email)
+                axios.post()
+                const response =  this.loginForm.post('/login')
+                data = response.data
+              } catch (e) {
+                return false
+              }
+              // Save the token.
+              this.$store.dispatch('auth/saveToken', {
+                token: data.token,
+                remember: true
+              })
+              // Fetch the user.
+              this.$store.dispatch('auth/fetchUser')
+
+              // Redirect index.
+              this.$router.push({ name: 'index' })
             } else {
               return false
             }

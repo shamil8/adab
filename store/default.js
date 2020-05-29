@@ -1,6 +1,7 @@
 export const state = () => ({
   theme: 'dark',   // 'dark' or 'light'
-  lang: 'ru',
+  // locales: ['en', 'tj', 'ru'],
+  // locale: 'tj',
   screenName: {
     large: 'large',
     medium: 'medium',
@@ -33,9 +34,14 @@ export const mutations = {
       state.window.type = state.screenName.medium
     else
       state.window.type = state.screenName.small
-  }
+  },
   // setWindowHeight (state, height) {
   //   state.window.height = height
+  // }
+  // SET_LANG (state, locale) {
+  //   if (state.locales.includes(locale)) {
+  //     state.locale = locale
+  //   }
   // }
 }
 

@@ -13,8 +13,11 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.9.6",
     "element-ui": "^2.4.11",
+    "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
-    "vuex": "latest"
+    "nuxt-i18n": "^6.12.1",
+    "vuex": "latest",
+    "vue": "latest"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",

@@ -4,7 +4,9 @@
     <vSearch class="main__search" v-if="getScreenName.small === getWindow.type" />
     <img class="main__image" src="~assets/images/man.gif" alt="Man">
     <el-button type="primary" plain>Adib</el-button>
-
+    <h2 class="subtitle">
+<!--      {{ $t('homepage.welcome') }}-->
+    </h2>
     {{getSearchText}}
   </div>
 </template>
@@ -26,7 +28,7 @@ export default {
   },
   data() {
     return {
-      
+
     }
   },
 }
