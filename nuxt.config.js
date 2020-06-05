@@ -42,6 +42,7 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/style-resources'
   ],
   styleResources: {
@@ -59,5 +60,18 @@ export default {
     */
     extend (config, ctx) {
     }
+  },
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': {
+      target: 'https://adabapi.ga/',
+      pathRewrite: {
+        '^/api' : '/'
+      },
+      changeOrigin: true
+    }
   }
+
 }

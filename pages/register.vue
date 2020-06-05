@@ -92,16 +92,7 @@
 
           this.errors.forEach((error, i, errors) => errors[i].message = '')   // called new message
 
-          axios.post('https://adabapi.ga/api/users', this.newUser, {
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-            },
-            proxy: {
-              host: '15.236.145.51',
-              port: 443
-            }
-          })
+          axios.post('https://adabapi.ga/api/users', this.newUser)
             .then(res => {
               console.log(res.data)
 
