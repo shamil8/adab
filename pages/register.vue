@@ -92,7 +92,7 @@
 
           this.errors.forEach((error, i, errors) => errors[i].message = '')   // called new message
 
-          axios.post('https://adabapi.ga/api/users', this.newUser)
+          axios.post('/api/users', this.newUser)
             .then(res => {
               console.log(res.data)
 
@@ -107,7 +107,7 @@
               // this.$router.push('/')
             })
             .catch(err => {
-              let data =  err.response.data
+              let data =  err.response ? err.response.data : {}
 
               if (data.violations) {
                 data.violations.forEach( (item, i, items) => {

@@ -66,7 +66,7 @@ export default {
   },
   proxy: {
     '/api': {
-      target: 'https://adabapi.ga/',
+      target: 'https://adabapi.ga/api/',
       pathRewrite: {
         '^/api' : '/'
       },
