@@ -1,3 +1,4 @@
+const baseUrl = 'https://adabapi.ga/'
 
 export default {
   mode: 'universal',
@@ -65,11 +66,13 @@ export default {
     proxy: true
   },
   proxy: {
+    '/api/login': {
+      target: baseUrl,
+      pathRewrite: { '^/api/login' : '/login' }
+    },
     '/api': {
-      target: 'https://adabapi.ga/api/',
-      pathRewrite: {
-        '^/api' : '/'
-      },
+      target: baseUrl,
+      pathRewrite: { '^/api' : '/api' },
       changeOrigin: true
     }
   }

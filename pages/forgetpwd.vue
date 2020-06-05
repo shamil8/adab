@@ -1,18 +1,18 @@
 <template>
-  <el-form :model="newPassForm" status-icon :rules="rules" ref="newPass" class="form-container">
+  <el-form :model="newPass" status-icon :rules="rules" ref="newPass" class="form-container">
     <div class="form-group">
-      Enter your email address and we'll reset your password
+      Введите ваш e-mail, и мы отправим вам письмо с паролем!
     </div>
 
     <el-form-item prop="email">
-      <el-input placeholder="Email" type="email" v-model="newPass.email"></el-input>
+      <el-input placeholder="E-mail" type="email" v-model="newPass.email"></el-input>
     </el-form-item>
 
-    <el-button type="primary" @click="submitForm('newPass')">Send</el-button>
+    <el-button type="primary" @click="submitForm('newPass')">Отправить</el-button>
 
     <div class="form-group">
-      You have an account?
-      <nuxt-link class="register" to="login">Login!</nuxt-link>
+      Уже есть аккаунт?
+      <nuxt-link class="register" to="login">Войти</nuxt-link>
     </div>
   </el-form>
 </template>
@@ -28,8 +28,8 @@
         },
         rules: {
           email: [
-            { required: true, message: 'Please input email address', trigger: 'blur' },
-            { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
+            { required: true, message: 'Введите ваш e-mail', trigger: 'blur' },
+            { type: 'email', message: 'Пожалуйста, введите правильный e-mail', trigger: ['blur', 'change'] }
           ]
         }
       }

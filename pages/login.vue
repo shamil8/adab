@@ -1,79 +1,83 @@
 <template>
   <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" class="form-container">
     <el-form-item prop="email">
-      <el-input placeholder="Email" type="email" v-model="loginForm.email" />
+      <el-input placeholder="Логин или e-mail" :disabled="formProcessing" type="text" v-model="loginForm.email" />
     </el-form-item>
 
     <el-form-item prop="password">
-      <el-input placeholder="Password" type="password" v-model="loginForm.password"/>
+      <el-input placeholder="Пароль" :disabled="formProcessing" type="password" v-model="loginForm.password"/>
     </el-form-item>
 
     <div class="form-group forgetpwd">
-      <nuxt-link to="forgetpwd">Forgot password?</nuxt-link>
+      <nuxt-link to="forgetpwd">Забыли пароль?</nuxt-link>
     </div>
-    <el-button type="primary" @click="submitForm('loginForm')">Login</el-button>
+    <el-button :loading="formProcessing" type="primary" @click="submitForm('loginForm')">Войти</el-button>
     <div class="form-group">
-      Create new account?
-      <nuxt-link class="register" to="register">Sign up!</nuxt-link>
+      Еще нет аккаунта?
+      <nuxt-link class="register" to="register">Зарегистрироваться</nuxt-link>
     </div>
   </el-form>
 </template>
 
 <script>
-    import axios from "../.nuxt/axios"
+  import axios from 'axios'
+  import fAuthError from '../mixins/f-auth-error'
 
-    export default {
-      name: "login",
-      layout: 'auth',
-      data() {
-        return {
-          loginForm: {
-            email: '',
-            password: '',
-          },
-          rules: {
-            email: [
-              { required: true, message: 'Please input email address', trigger: 'blur' },
-              { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
-            ],
-            password: [
-              { required: true, message: 'Please enter your password', trigger: 'blur' },
-              { min: 6, message: 'Your password is too short!' },
-            ],
-          }
-        }
-      },
-      methods: {
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              let data
-              // Submit the form.
-              try {
-                alert(this.loginForm.email)
-                axios.post()
-                const response =  this.loginForm.post('/login')
-                data = response.data
-              } catch (e) {
-                return false
-              }
-              // Save the token.
-              this.$store.dispatch('auth/saveToken', {
-                token: data.token,
-                remember: true
-              })
-              // Fetch the user.
-              this.$store.dispatch('auth/fetchUser')
-
-              // Redirect index.
-              this.$router.push({ name: 'index' })
-            } else {
-              return false
-            }
-          })
+  export default {
+    name: "login",
+    layout: 'auth',
+    mixins: [ fAuthError ],
+    data() {
+      return {
+        loginForm: {
+          email: '',
+          password: '',
+        },
+        rules: {
+          email: [
+            { required: true, message: 'Введите ваш логин или e-mail ', trigger: 'blur' }
+          ],
+          password: [
+            { required: true, message: 'Введите ваш пароль' }
+          ],
         }
       }
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate( valid => {
+          if (!valid) return false
+
+          this.formProcessing = true
+
+          axios.post('/api/login', this.loginForm)
+            .then(res => {
+              console.log(res.data)
+              axios.get(res.headers.location)
+
+              this.$message({   // alert message
+                showClose: true,
+                message: 'Авторизация пройдено успешно :)',
+                type: 'success'
+              })
+              //
+              // // Save the token.
+              // this.$store.dispatch('auth/saveToken', {
+              //   token: data.token,
+              //   remember: true
+              // })
+              // // Fetch the user.
+              // this.$store.dispatch('auth/fetchUser')
+              //
+              // // Redirect index.
+              // this.$router.push({ name: 'index' })
+            })
+            .catch(err => this.errorQueryCheck(err.response ? err.response.data : {}) )
+            .then(() => this.formProcessing = false)
+        })
+      }
     }
+  }
 </script>
 
 <style lang="scss">

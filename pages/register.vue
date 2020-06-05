@@ -21,26 +21,28 @@
       type="primary"
       @click="submitForm('newUser')"
     >
-      Sign up
+      Регистрация
     </el-button>
 
     <div class="form-group">
-      You have an account?
-      <nuxt-link class="register" to="login">Login!</nuxt-link>
+<!--      You have an account?-->
+      Уже есть аккаунт?
+      <nuxt-link class="register" to="login">Войти</nuxt-link>
     </div>
   </el-form>
 </template>
 
 <script>
   import axios from 'axios'
+  import fAuthError from '../mixins/f-auth-error'
 
   export default {
     name: "register",
     layout: 'auth',
+    mixins: [ fAuthError ],
     data() {
       return {
         errors: [],
-        formProcessing: false,
         newUser: {
           name: '',
           email: '',
@@ -48,21 +50,15 @@
         },
         rules: {
           name: [
-            // { required: true, message: 'Please enter your name', trigger: 'blur' },
-            // { min: 2, message: 'Your name is too short!' },
-            { required: true, message: 'Введите ваше имя и фамилию', trigger: 'blur' },
+            { required: true, message: 'Введите ваши имя и фамилию', trigger: 'blur' },
             { min: 2, message: 'Имя слишком короткая.' },
             { max: 55, message: 'Имя слишком длинная.' },
           ],
           email: [
-            // { required: true, message: 'Please input email address', trigger: 'blur' },
-            // { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
             { required: true, message: 'Введите e-mail', trigger: 'blur' },
             { type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
           ],
           password: [
-            // { required: true, message: 'Please enter your password', trigger: 'blur' },
-            // { min: 6, message: 'Your password is too short!' },
             { required: true, message: 'Введите пароль', trigger: 'blur' },
             { min: 6, message: 'Пароль слишком короткий' },
           ],
@@ -70,25 +66,12 @@
       }
     },
     methods: {
-      getErrorForField(field, errors) {
-        if (!errors && !errors.length) {
-          return false
-        }
-
-        let filtered = errors.filter(error => error.path[0] === field)
-
-        if (filtered.length) {
-          return filtered[0].message
-        }
-      },
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (!valid) {
-            return false
-          }
+        this.$refs[formName].validate( valid => {
+          if (!valid) return false
 
+          this.newUser.username = this.newUser.email.split('@')[0]    // bad!
           this.formProcessing = true
-          this.newUser.username = this.newUser.email.split('@')[0]
 
           this.errors.forEach((error, i, errors) => errors[i].message = '')   // called new message
 
@@ -99,35 +82,27 @@
               this.newUser = {}
               this.$message({   // alert message
                 showClose: true,
-                message: 'Авторизация пройдено успешно:)',
+                message: 'Авторизация пройдено успешно :)',
                 type: 'success'
               })
 
               // this.$store.dispatch('login')
               // this.$router.push('/')
             })
-            .catch(err => {
-              let data =  err.response ? err.response.data : {}
-
-              if (data.violations) {
-                data.violations.forEach( (item, i, items) => {
-                  items[i].path = [item.propertyPath]
-
-                  delete items[i].propertyPath
-                })
-
-                this.errors = data.violations
-
-              } else {
-                this.$message({   // alert message
-                  showClose: true,
-                  message: data.error ? data.error : 'Неизвестная ошибка',
-                  type: 'error'
-                })
-              }
-            })
+            .catch(err => this.errorQueryCheck(err.response ? err.response.data : {}) )
             .then(() => this.formProcessing = false)
         })
+      },
+      getErrorForField(field, errors) {
+        if (!errors && !errors.length) {
+          return false
+        }
+
+        let filtered = errors.filter(error => error.path[0] === field)
+
+        if (filtered.length) {
+          return filtered[0].message
+        }
       }
     }
   }
