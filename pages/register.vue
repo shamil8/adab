@@ -97,6 +97,10 @@
               'Access-Control-Allow-Origin': '*',
               'Access-Control-Allow-Headers': 'Content-Type, Authorization',
             },
+            proxy: {
+              host: '15.236.145.51',
+              port: 443
+            }
           })
             .then(res => {
               console.log(res.data)
