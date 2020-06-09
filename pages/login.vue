@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   import fAuthError from '../mixins/f-auth-error'
 
   export default {
@@ -50,10 +49,10 @@
 
           this.formProcessing = true
 
-          axios.post('/api/login', this.loginForm)
+          this.$axios.post('/api/login', this.loginForm)
             .then(res => {
               console.log(res.data)
-              axios.get(res.headers.location)
+              this.$axios.get(res.headers.location)
 
               this.$message({   // alert message
                 showClose: true,

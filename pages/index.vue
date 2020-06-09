@@ -3,11 +3,12 @@
     <h3 class="main__title" >Education portal</h3>
     <vSearch class="main__search" v-if="getScreenName.small === getWindow.type" />
     <img class="main__image" src="~assets/images/man.gif" alt="Man">
-    <el-button type="primary" plain>Adib</el-button>
+    <el-button @click.prevent="showPoem" type="primary" plain>Poem 1</el-button>
     <h2 class="subtitle">
 <!--      {{ $t('homepage.welcome') }}-->
     </h2>
     {{getSearchText}}
+
   </div>
 </template>
 
@@ -22,6 +23,11 @@ export default {
       getWindow: 'default/getWindow',
       getScreenName: 'default/getScreenName'
     })
+  },
+  methods: {
+    showPoem() {
+      this.$router.push({ name: 'poems-id', params: { id: 1 } })
+    }
   },
   components: {
     vSearch
