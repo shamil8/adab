@@ -32,8 +32,6 @@
 </template>
 
 <script>
-  import {mapMutations} from "vuex"
-
   export default {
     name: "a-poem",
     props: {
@@ -47,12 +45,7 @@
       }
     },
     methods: {
-      ...mapMutations({
-        setPoem: 'poems/setPoem'
-      }),
       showPoem(poem) {
-        this.setPoem(poem)
-
         this.$router.push({ name: 'poems-id', params: { id: poem.id } })
       }
     }

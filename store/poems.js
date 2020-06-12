@@ -1,6 +1,5 @@
 export const state = () => ({
-  poems: [],
-  poem: {}
+  poems: []
 
 })
 
@@ -9,22 +8,23 @@ export const mutations = {
     state.poems = poems
   },
   setPoem(state, poem) {
-    state.poem = poem
-  },
+    state.poems.push(poem)
+  }
 }
 
 export const actions = {
   async fetchPoems({commit}) {
-    const poems = await this.$axios.get('/api/poems.json')
-    commit('setPoems', poems.data)
+    const { data } = await this.$axios.get('/api/poems.json')
+    commit('setPoems', data)
   },
-  async fetchPoem({commit}, id) {
-    const poem = await this.$axios.get(`/api/poems/${id}.json`)
-    commit('setPoem', poem.data)
+  async fetchPoem({commit}, params) {
+    await this.$axios.get(`/api/poems/${params.id}.json`)
+      .then((res) => commit('setPoem', res.data))
+      .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
   }
 }
 
 export const getters = {
   poems: s => s.poems,
-  poem: s => s.poem
+  poemById: s => id => s.poems.find(poem => poem.id === id)
 }

@@ -20,12 +20,12 @@
 </template>
 
 <script>
-  import fAuthError from '../mixins/f-auth-error'
+  import pAuthError from '../mixins/p-auth-error'
 
   export default {
     name: "login",
     layout: 'auth',
-    mixins: [ fAuthError ],
+    mixins: [ pAuthError ],
     data() {
       return {
         loginForm: {

@@ -33,13 +33,12 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import fAuthError from '../mixins/f-auth-error'
+  import pAuthError from '../mixins/p-auth-error'
 
   export default {
     name: "register",
     layout: 'auth',
-    mixins: [ fAuthError ],
+    mixins: [ pAuthError ],
     data() {
       return {
         errors: [],
@@ -75,7 +74,7 @@
 
           this.errors.forEach((error, i, errors) => errors[i].message = '')   // called new message
 
-          axios.post('/api/users', this.newUser)
+          this.$axios.post('/api/users', this.newUser)
             .then(res => {
               console.log(res.data)
 

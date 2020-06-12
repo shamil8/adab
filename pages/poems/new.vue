@@ -1,10 +1,6 @@
 <template>
   <div>
-    <el-page-header title="Назад" @back="$router.push({name: 'poems'})" />
-
-    <h1>Create a new poem</h1>
-
-    <a-poem-update />
+    <a-poem-update :is-update="false" />
 
   </div>
 </template>

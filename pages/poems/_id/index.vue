@@ -5,29 +5,15 @@
 </template>
 
 <script>
+  import pPoemsId from "~/mixins/p-poems_id"
   import aPoemShow from '~/components/poem/a-poem-show'
 
   export default {
-    validate({params}) {
-      return /^\d+$/.test(params.id)
-    },
-    async fetch({store, params}) {
-      if (store.getters['poems/poem'].id !== params.id) {
-        await store.dispatch('poems/fetchPoem', params.id)
-      }
-    },
-    computed: {
-      poem() {
-        return this.$store.getters['poems/poem']
-      }
-    },
+    name: "index",
+    mixins: [ pPoemsId ],
     components: {
       aPoemShow
     }
-    // async asyncData({$axios, params}) {
-    //   const poem = await $axios.$get('https://jsonplaceholder.typicode.com/users/' + params.id)
-    //   return {poem}
-    // },
   }
 </script>
 

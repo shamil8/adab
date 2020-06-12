@@ -63,7 +63,7 @@
 <style lang="scss">
   .a-poems {
     display: grid;
-    padding: 24px;
+    /*padding: 24px;*/
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 1rem;
     @media (max-width: 560px) {
