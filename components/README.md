@@ -1,5 +1,5 @@
 # COMPONENTS
-What those letters mean in the beginning files?
+Which means the letters at the beginning of the files?
 if it is:
 ****
  `c` - copy component (other sources)
