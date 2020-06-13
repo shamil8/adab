@@ -1,5 +1,4 @@
 // https://github.com/cretueusebiu/laravel-nuxt/blob/master/client/store/auth.js
-import axios from 'axios'
 import Cookies from 'js-cookie'
 
 // state
@@ -10,26 +9,26 @@ export const state = () => ({
 
 // getters
 export const getters = {
-  user: state => state.user,
-  token: state => state.token,
-  check: state => state.user !== null
+  user: s => s.user,
+  token: s => s.token,
+  hasToken: s => !!s.token
 }
 
 // mutations
 export const mutations = {
-  SET_TOKEN (state, token) {
+  setToken(state, token) {
     state.token = token
   },
 
-  FETCH_USER_SUCCESS (state, user) {
+  setUser(state, user) {
     state.user = user
   },
 
-  FETCH_USER_FAILURE (state) {
+  clearToken(state) {
     state.token = null
   },
 
-  LOGOUT (state) {
+  logout(state) {
     state.user = null
     state.token = null
   },
@@ -41,21 +40,20 @@ export const mutations = {
 
 // actions
 export const actions = {
-  saveToken ({ commit, dispatch }, { token, remember }) {
-    commit('SET_TOKEN', token)
+  saveToken ({commit}, {token, remember}) {
+    commit('setToken', token)
 
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
-  async fetchUser ({ commit }) {
+  async fetchUser ({commit}, token) {
     try {
-      const { data } = await axios.get('/user')
-
-      commit('FETCH_USER_SUCCESS', data)
+      const { data } = await this.$axios.post('/api/user', {token})
+      commit('setUser', data)
     } catch (e) {
       Cookies.remove('token')
 
-      commit('FETCH_USER_FAILURE')
+      commit('clearToken')
     }
   },
 
@@ -65,16 +63,16 @@ export const actions = {
 
   async logout ({ commit }) {
     try {
-      await axios.post('/logout')
+      await this.$axios.post('/api/logout')
     } catch (e) { }
 
     Cookies.remove('token')
 
-    commit('LOGOUT')
+    commit('logout')
   },
 
   async fetchOauthUrl (ctx, { provider }) {
-    const { data } = await axios.post(`/oauth/${provider}`)
+    const { data } = await this.$axios.post(`/oauth/${provider}`)
 
     return data.url
   }

@@ -66,9 +66,17 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api/login': {
+    '/api/auth_token': {
       target: baseUrl,
-      pathRewrite: { '^/api/login' : '/login' }
+      pathRewrite: { '^/api/auth_token' : '/auth_token' }
+    },
+    '/api/logout': {
+      target: baseUrl,
+      pathRewrite: { '^/api/logout' : '/logout' }
+    },
+    '/api/user': {
+      target: baseUrl,
+      pathRewrite: { '^/api/user' : '/user' }
     },
     '/api': {
       target: baseUrl,

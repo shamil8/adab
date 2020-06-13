@@ -19,11 +19,10 @@
         </div>
       </div>
 
-
       <div class="a-poem-item__info">
         <p @click="showPoem(poem)" v-html="poem.shortText" class="a-poem-item__info--text"></p>
 
-        <p class="a-poem-item__info--address">Устод:
+        <p v-if="poem.poet" class="a-poem-item__info--address">Устод:
           <el-link type="primary">{{poem.poet.name + ' ' + poem.poet.surname}}</el-link>
         </p>
       </div>
@@ -114,6 +113,7 @@
 
       &--text {
         cursor: pointer;
+        color: var(--app-logo-text);
       }
 
       &--address {

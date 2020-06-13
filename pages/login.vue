@@ -49,29 +49,33 @@
 
           this.formProcessing = true
 
-          this.$axios.post('/api/login', this.loginForm)
+          this.$axios.post('/api/auth_token', this.loginForm)
             .then(res => {
-              console.log(res.data)
-              this.$axios.get(res.headers.location)
+              const token = res.data.token
 
               this.$message({   // alert message
                 showClose: true,
                 message: 'Авторизация пройдено успешно :)',
                 type: 'success'
               })
-              //
-              // // Save the token.
-              // this.$store.dispatch('auth/saveToken', {
-              //   token: data.token,
-              //   remember: true
-              // })
-              // // Fetch the user.
-              // this.$store.dispatch('auth/fetchUser')
-              //
-              // // Redirect index.
-              // this.$router.push({ name: 'index' })
+
+              // Save the token.
+              this.$store.dispatch('auth/saveToken', {token, remember: true})
+
+              // Fetch the user.
+              this.$store.dispatch('auth/fetchUser', token)
+
+              // Redirect index.
+              this.$router.push({ name: 'index' })
             })
-            .catch(err => this.errorQueryCheck(err.response ? err.response.data : {}) )
+            .catch(() => {
+              this.$message({
+                showClose: true,
+                message: 'Введен неверный логин или пароль!',
+                type: 'error'
+              })
+              // this.errorQueryCheck(err.response ? err.response.data : {})
+            })
             .then(() => this.formProcessing = false)
         })
       }

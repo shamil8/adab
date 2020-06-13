@@ -9,9 +9,9 @@
       <img class="v-user-popover__reference--image" src="../assets/images/avatar.png" alt="Img">
     </el-button>
 
-    <div class="v-user-popover__container">
+    <div v-if="user" class="v-user-popover__container">
       <img class="v-user-popover__container--image" src="../assets/images/avatar.png" alt="Img">
-      <h3 class="v-user-popover__container--name">Shamil Kurbonov</h3>
+      <h3 class="v-user-popover__container--name">{{user.name ? user.name : 'Hi!'}}</h3>
       <cDayNightToggle class="v-user-popover__container--day-night"/>
       <nuxt-link to="settings"><el-button><i class="el-icon-setting"/> Settings</el-button></nuxt-link>
       <el-button @click.prevent="logout"><i class="el-icon-pear"/>Log out</el-button>
@@ -28,10 +28,15 @@
       components: {
         cDayNightToggle
       },
+      computed: {
+        user() {
+          return this.$store.getters['auth/user']
+        }
+      },
       methods: {
         logout() {
-          this.$store.dispatch('logout')
-          this.$router.push('/login')
+          this.$store.dispatch('auth/logout')
+          // this.$router.push('/')
         }
       }
     }

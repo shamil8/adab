@@ -64,6 +64,8 @@
   .a-poem-show {
 
     &__card {
+      background-color: var(--app-background);
+      color: var(--app-logo-text);
       &--header, .header {  // card header
         &__back {
           display: inline-block;
@@ -92,6 +94,16 @@
           .el-scrollbar__bar.is-horizontal {
             display: none;
           }
+          .el-collapse-item {  // Element UI collapse
+            &__wrap, &__header {
+              background-color: var(--app-background);
+              color: var(--app-logo-text);
+            }
+            &__content {
+              color: var(--app-logo-text);
+            }
+          }
+
         }
 
         &__text {

@@ -1,5 +1,5 @@
 export default ({ store, redirect }) => {
-  if (!store.getters['auth/check']) {
+  if (!store.getters['auth/hasToken']) {
     return redirect('/login')
   }
 }

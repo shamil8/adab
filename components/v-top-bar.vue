@@ -57,7 +57,7 @@
         getScreenName: 'default/getScreenName'
       }),
       hasToken() {
-        return this.$store.getters.hasToken
+        return this.$store.getters['auth/hasToken']
       }
     },
     methods: {
