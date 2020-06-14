@@ -1,10 +1,6 @@
 import Cookies from 'js-cookie'
 import { cookieFromRequest } from '../untils'
 
-export const state = () => ({})
-
-export const mutations = {}
-
 export const actions = {
   async nuxtServerInit ({ commit, dispatch }, { req }) {
     const token = cookieFromRequest(req, 'token')
@@ -30,9 +26,10 @@ export const actions = {
     if (locale) {
       commit('lang/SET_LOCALE', { locale })
     }
+
+    const themeSting = Cookies.get('theme')
+    if (themeSting) {
+      commit('default/setTheme', themeSting)
+    }
   }
-}
-
-export const getters = {
-
 }

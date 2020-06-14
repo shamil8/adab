@@ -25,13 +25,15 @@ export default {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    './assets/scss/default.scss'
+    './assets/scss/default.scss',
+    './assets/scss/element-ui.scss'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/nuxt-client-init'
   ],
   /*
   ** Nuxt.js dev-modules

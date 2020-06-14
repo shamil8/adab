@@ -1,6 +1,6 @@
 <template>
   <div class="c-day-night-toggle">
-    <input class="toggle-input" type="checkbox" v-model="darkMode"/>
+    <input class="toggle-input" type="checkbox" v-model="isDark"/>
     <div class="toggle-bg"></div>
     <div class="toggle-switch">
       <div class="toggle-switch-figure"></div>
@@ -10,54 +10,27 @@
 </template>
 
 <script>
-    import { mapMutations, mapGetters } from 'vuex'
-
-    export default {
-        name: "c-day-night-toggle",
-        data() {
-            return {
-                darkMode: this.getTheme === 'dark'
-            }
-        },
-        computed: {
-            ...mapGetters({
-                getTheme: 'default/getTheme'
-            })
-        },
-        methods: {
-          ...mapMutations({
-              editTheme: 'default/editTheme'
-          })
-        },
-        mounted() {
-            // check for active theme
-            let htmlElement = document.documentElement
-
-            if (this.getTheme === 'dark') {
-                htmlElement.setAttribute('theme', 'dark')
-                this.darkMode = true
-                this.editTheme('dark')
-            } else {
-                htmlElement.setAttribute('theme', 'light')
-                this.darkMode = false
-                this.editTheme('light')
-            }
-        },
-        watch: {
-            darkMode: function () {
-                // add/remove class to/from html tag
-                let htmlElement = document.documentElement
-
-                if (this.darkMode) {
-                    this.editTheme('dark')
-                    htmlElement.setAttribute('theme', 'dark')
-                } else {
-                    this.editTheme('light')
-                    htmlElement.setAttribute('theme', 'light')
-                }
-            }
-        }
+  export default {
+    name: "c-day-night-toggle",
+    data() {
+      return {
+        isDark: false
+      }
+    },
+    computed: {
+      theme() {
+        return this.$store.getters['default/theme']
+      }
+    },
+    mounted() {
+      this.isDark = this.theme === 'dark'
+    },
+    watch: {
+      isDark: function() {
+        this.$store.dispatch('default/saveTheme', this.isDark ? 'dark' : 'light')
+      }
     }
+  }
 </script>
 
 <style lang="scss">

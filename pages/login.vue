@@ -53,12 +53,6 @@
             .then(res => {
               const token = res.data.token
 
-              this.$message({   // alert message
-                showClose: true,
-                message: 'Авторизация пройдено успешно :)',
-                type: 'success'
-              })
-
               // Save the token.
               this.$store.dispatch('auth/saveToken', {token, remember: true})
 

@@ -1,5 +1,7 @@
+import Cookies from 'js-cookie'
+
 export const state = () => ({
-  theme: 'dark',   // 'dark' or 'light'
+  theme: 'light',   // 'dark' or 'light'
   // locales: ['en', 'tj', 'ru'],
   // locale: 'tj',
   screenName: {
@@ -20,10 +22,13 @@ export const state = () => ({
 })
 
 export const mutations = {
-  editTheme (state, status) {
+  setTheme (state, status) {
+    const htmlElement = document.querySelector('html')
+
+    htmlElement.setAttribute('theme', status)
     state.theme = status
   },
-  editLang (state, lang) {
+  setLang (state, lang) {
     state.lang = lang
   },
   setWindowWidth (state, width) {
@@ -45,13 +50,18 @@ export const mutations = {
   // }
 }
 
+export const actions = {
+  saveTheme({commit}, status) {
+    commit('setTheme', status)
+
+    Cookies.set('theme', status)
+  }
+}
+
 export const getters = {
-  getTheme: (state) => {
-    return state.theme
-  },
-  getLang (state) {
-    return state.lang
-  },
+  theme: s => s.theme,
+  lang: s => s.lang,
+
   getScreen (state) {
     return state.screen
   },

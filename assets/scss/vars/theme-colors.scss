@@ -10,12 +10,13 @@
   --app-background-focus: rgba(0, 0, 0, 0.1);
 
   // text colors
-  --app-text-color: #6c6e73;
+  --app-text-color: #6C6E73;
 
   // Logo colors
   --app-logo-text: #3d3f44;
 
   //border colors
+  --app-border: #D9EEFB;
   --app-border-menu: #e6e6e6;
 }
 
@@ -30,10 +31,11 @@
   --app-text-color: #FFFFFF;
 
   // Logo colors
-  --app-logo-text: #dcdcdc;
+  --app-logo-text: #DCDCDC;
 
   //border colors
-  --app-border-menu: #ffcc33;
+  --app-border: #3d3f44;
+  --app-border-menu: #FFCC33;
 }
 
 [theme="sepia"] {
