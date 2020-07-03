@@ -1,6 +1,7 @@
 <template>
   <div class="a-poems">
     <el-button
+      v-if="$store.getters['auth/hasToken']"
       @click="$router.push({name: 'poems-new'})"
       class="a-poems__new"
     >

@@ -8,15 +8,25 @@
       <form>
       <div class="a-poem-update__card--body body">
         <el-scrollbar class="body__scrollbar" :native="false">
+          <p class="body__under-text">Введите названия стихотворения (необязательно)</p>
           <el-input
             class="body__text"
-            type="textarea"
-            :autosize="{ minRows: 8, maxRows: 35}"
+            placeholder="названия стихотворения"
+            type="text"
+            v-model="poem.name"
+          />
+
+          <p class="body__under-text">Введите текст стихотворения</p>
+          <el-input
+            class="body__text"
             placeholder="Введите текст стихотворения"
+            type="textarea"
             v-model="poem.text"
+            :autosize="{ minRows: 8, maxRows: 15}"
           />
 
           <div class="body__content">
+            <p class="body__under-text">Выберите писателя</p>
             <el-select
               class="body__content--poet"
               v-model="poem.poet.id"
@@ -27,30 +37,44 @@
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
-              </el-option>
+                :value="item.value"
+              />
             </el-select>
 
-            <br>
-
+            <p class="body__under-text">Выберите теги</p>
             <el-select
               v-model="value"
               multiple
               filterable
               allow-create
               default-first-option
-              placeholder="Choose tags for your article">
+              placeholder="Теги для стихотворения"
+            >
               <el-option
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
-              </el-option>
+                :value="item.value"
+              />
             </el-select>
+
+            <p class="body__under-text">Введите описания стихотворения (необязательно)</p>
+            <el-input
+              class="body__text"
+              placeholder="Введите текст стихотворения"
+              type="textarea"
+              v-model="poem.description"
+              :autosize="{ minRows: 4, maxRows: 15}"
+            />
+
           </div>
 
-          <el-button @click.prevent="updatePoem" class="body__submit" type="primary">Сохранить</el-button>
-          <br><br><br><br><br><br><br><br><br><br>
+          <el-button @click.prevent="updatePoem"
+                     class="body__submit"
+                     type="primary"
+          >
+            {{isUpdate ? 'Изменить' : 'Добавить'}}
+          </el-button>
         </el-scrollbar>
       </div>
       </form>
@@ -83,21 +107,26 @@
           value: 3,
           label: 'JavaScript'
         }],
+        value: ''
       }
     },
     methods: {
       updatePoem() {
-        this.$router.push({name: 'poems'})
+        console.log(this.poem)
+        // this.$router.push({name: 'poems'})
       }
     },
-    // computed: {
-    //   poemUpdate() {
-    //
-    //   }
-    // },
     mounted() {
       if (this.isUpdate) {
-        this.poem = this.$store.getters['poems/poemById'](+this.$route.params.id)
+        this.poem = JSON.parse(JSON.stringify(this.$store.getters['poems/poemById'](+this.$route.params.id))) // copy object
+        this.poem.text = this.poem.text.replace(/<br\s*[\/]?>\s{0,}/gi, '\n')
+
+
+        if (this.poem.description) {
+          this.poem.description = this.poem.description.replace(/<br\s*[\/]?>\s{0,}/gi, '\n')
+        }
+
+        this.poem.poet.id = 1
       }
     }
   }
@@ -136,8 +165,16 @@
           }
         }
 
+        &__under-text {
+          font-weight: 500;
+          padding-bottom: 8px;
+          padding-top: 15px;
+          font-size: 14px;
+        }
+
         &__text {
-          text-align: center;
+          width: 98%;
+          display: block;
         }
 
         &__content {    // body content
@@ -145,7 +182,7 @@
           border-top: 1px solid var(--app-border-menu);
 
           &--poet {
-            margin: 15px 0;
+
           }
 
           &--owner {
@@ -158,7 +195,7 @@
         }
 
         &__submit {
-          margin: 0 auto;
+          margin: 0 auto 10px;
           display: block;
         }
       }

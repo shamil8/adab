@@ -10,6 +10,7 @@
 
   export default {
     name: "new",
+    middleware: ['auth'],
     components: {
       aPoemUpdate
     }

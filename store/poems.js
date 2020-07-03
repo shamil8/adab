@@ -17,10 +17,17 @@ export const actions = {
     const { data } = await this.$axios.get('/api/poems.json')
     commit('setPoems', data)
   },
+
   async fetchPoem({commit}, params) {
     await this.$axios.get(`/api/poems/${params.id}.json`)
       .then((res) => commit('setPoem', res.data))
       .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
+  },
+
+  async updatePoem({commit}, data) {    // You need to change it!!!
+    await this.$axios.put(`/api/poems/${data.id}`, data)
+      .then(res => commit('setPoem', res.data))
+      .catch(() => data.error({ statusCode: 404, message: 'Не получилось обновить стих' }))
   }
 }
 
