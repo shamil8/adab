@@ -27,17 +27,19 @@
 
           <div class="body__content">
             <p class="body__under-text">Выберите писателя</p>
+            <p v-if="loadingPoem">Loading...</p>
             <el-select
+              v-else
               class="body__content--poet"
-              v-model="poem.poet.id"
+              v-model="poetId"
               filterable
               placeholder="Создатель"
             >
               <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="poet in poets"
+                :key="poet['@id']"
+                :label="poet.name + ' ' + poet.surname"
+                :value="poet['@id']"
               />
             </el-select>
 
@@ -51,10 +53,10 @@
               placeholder="Теги для стихотворения"
             >
               <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                v-for="tag in tags"
+                :key="tag.value"
+                :label="tag.label"
+                :value="tag.value"
               />
             </el-select>
 
@@ -93,29 +95,35 @@
     },
     data() {
       return {
+        loadingPoem: false,
         poem: {
-          poet: {},
-          owner: {}
+          poet: null,
+          owner: this.$store.getters['auth/user']['@id']    // default creator
         },
-        options: [{
+        poets: [],
+        poetId: '',
+        tags: [{
           value: 1,
-          label: 'HTML'
+          label: 'ватан'
         }, {
           value: 2,
-          label: 'CSS'
+          label: 'бародари'
         }, {
           value: 3,
-          label: 'JavaScript'
+          label: 'мухаббат'
         }],
         value: ''
       }
     },
     methods: {
       updatePoem() {
-        if (this.$store.getters["auth/hasToken"]) {   // validation!!!
-          this.$store.dispatch('poems/updatePoem', {
+        if (this.$store.getters["auth/hasToken"]) {   // You'll need to add validation!!!
+          this.poem.poet = this.poetId
+
+          this.$store.dispatch('poem/updatePoem', {
             token: 'BEARER ' + this.$store.getters["auth/token"],
-            data: this.poem
+            data: this.poem,
+            isUpdate: this.isUpdate
           })
             .then(data => {
               if (data.id) {
@@ -130,16 +138,26 @@
     },
     mounted() {
       if (this.isUpdate) {
-        this.poem = JSON.parse(JSON.stringify(this.$store.getters['poems/poemById'](+this.$route.params.id))) // copy object
+        this.poem = JSON.parse(JSON.stringify(this.$store.getters['poem/poemById'](+this.$route.params.id))) // copy object
         this.poem.text = this.poem.text.replace(/<br\s*[\/]?>\s{0,}/gi, '\n')
-
 
         if (this.poem.description) {
           this.poem.description = this.poem.description.replace(/<br\s*[\/]?>\s{0,}/gi, '\n')
         }
 
-        this.poem.poet.id = 1
+        this.poetId = this.poem.poet['@id']
       }
+
+      if (this.$store.getters['poet/poets'].length === 0) {
+        this.loadingPoem = true
+
+        this.$store.dispatch('poet/fetchPoets').then(() => {
+          this.poets = this.$store.getters['poet/poets']
+
+          this.loadingPoem = false
+        })
+      } else this.poets = this.$store.getters['poet/poets']
+
     }
   }
 </script>

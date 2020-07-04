@@ -1,4 +1,4 @@
-import da from "element-ui/src/locale/lang/da"
+const url = '/api/poems'
 
 export const state = () => ({
   poems: []
@@ -21,23 +21,28 @@ export const mutations = {
 
 export const actions = {
   async fetchPoems({commit}) {
-    const { data } = await this.$axios.get('/api/poems.json')
-    commit('setPoems', data)
+    const { data } = await this.$axios.get(url + '.jsonld')
+
+    commit('setPoems', data['hydra:member'])
   },
 
   async fetchPoem({commit}, params) {
-    await this.$axios.get(`/api/poems/${params.id}.json`)
+    await this.$axios.get(url + `/${params.id}.json`)
       .then((res) => commit('setPoem', res.data))
       .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
   },
 
   async updatePoem({commit}, params) {
     try {
-      const { data } = await this.$axios.put(`/api/poems/${params.data.id}`, params.data, {
+      const config = {
         headers: {'Authorization': params.token}
-      })
+      }
 
-      commit('updatePoem', data)
+      const { data } = params.isUpdate
+        ? await this.$axios.put(url + `/${params.data.id}`, params.data, config)    // change the poem
+        : await this.$axios.post(url, params.data, config)                              // create a poem
+
+      commit(params.isUpdate ? 'updatePoem' : 'setPoem', data)
 
       return data
     } catch (err) {

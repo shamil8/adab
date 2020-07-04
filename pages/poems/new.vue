@@ -1,6 +1,8 @@
 <template>
   <div>
-    <a-poem-update :is-update="false" />
+    <client-only>
+      <a-poem-update :is-update="false" />
+    </client-only>
 
   </div>
 </template>

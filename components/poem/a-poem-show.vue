@@ -44,12 +44,12 @@
     name: "a-poem-show",
     data() {
       return {
-        activeNames: ['1']
+        activeNames: ['1', '2']
       }
     },
     computed: {
       poem() {
-        return this.$store.getters['poems/poemById'](+this.$route.params.id)
+        return this.$store.getters['poem/poemById'](+this.$route.params.id)
       }
     },
     methods: {

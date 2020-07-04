@@ -49,6 +49,9 @@ export const actions = {
   async fetchUser ({commit}, token) {
     try {
       const { data } = await this.$axios.post('/api/user', {token})
+
+      data['@id'] = '/api/users/' + data.id
+
       commit('setUser', data)
     } catch (e) {
       Cookies.remove('token')
@@ -61,10 +64,8 @@ export const actions = {
     commit('UPDATE_USER', payload)
   },
 
-  async logout ({ commit }) {
-    try {
-      await this.$axios.post('/api/logout')
-    } catch (e) { }
+  logout ({ commit }) {
+    this.$axios.get('/api/logout')
 
     Cookies.remove('token')
 

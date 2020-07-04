@@ -11,8 +11,8 @@
   export default {
     name: "index.vue",
     async fetch({store}) {
-      if (store.getters['poems/poems'].length === 0) {
-        await store.dispatch('poems/fetchPoems')
+      if (store.getters['poem/poems'].length === 0) {
+        await store.dispatch('poem/fetchPoems')
       }
     },
     methods: {

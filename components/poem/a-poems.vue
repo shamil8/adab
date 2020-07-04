@@ -45,7 +45,7 @@
     },
     computed: {
       poems() {
-        return this.$store.getters['poems/poems']
+        return this.$store.getters['poem/poems']
       }
     },
     methods: {
