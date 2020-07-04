@@ -7,7 +7,7 @@
           <span><i class="el-icon-view"/></span>
         </span>
 
-        <div class="a-poem-item__header--action">
+        <div v-if="$store.getters['auth/hasToken']" class="a-poem-item__header--action">
           <span @click="$router.push({ name: 'poems-id-update', params: { id: poem.id } })" class="action__edit">
             <i class="el-icon-edit-outline"/>
           </span>

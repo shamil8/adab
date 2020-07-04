@@ -1,3 +1,5 @@
+import da from "element-ui/src/locale/lang/da"
+
 export const state = () => ({
   poems: []
 
@@ -9,6 +11,11 @@ export const mutations = {
   },
   setPoem(state, poem) {
     state.poems.push(poem)
+  },
+  updatePoem(state, data) {
+    const objIndex = state.poems.findIndex(poem => poem.id === data.id)
+
+    state.poems[objIndex] = data
   }
 }
 
@@ -24,10 +31,18 @@ export const actions = {
       .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
   },
 
-  async updatePoem({commit}, data) {    // You need to change it!!!
-    await this.$axios.put(`/api/poems/${data.id}`, data)
-      .then(res => commit('setPoem', res.data))
-      .catch(() => data.error({ statusCode: 404, message: 'Не получилось обновить стих' }))
+  async updatePoem({commit}, params) {
+    try {
+      const { data } = await this.$axios.put(`/api/poems/${params.data.id}`, params.data, {
+        headers: {'Authorization': params.token}
+      })
+
+      commit('updatePoem', data)
+
+      return data
+    } catch (err) {
+      return err.response ? err.response.data : {}
+    }
   }
 }
 

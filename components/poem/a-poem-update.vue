@@ -112,8 +112,20 @@
     },
     methods: {
       updatePoem() {
-        console.log(this.poem)
-        // this.$router.push({name: 'poems'})
+        if (this.$store.getters["auth/hasToken"]) {   // validation!!!
+          this.$store.dispatch('poems/updatePoem', {
+            token: 'BEARER ' + this.$store.getters["auth/token"],
+            data: this.poem
+          })
+            .then(data => {
+              if (data.id) {
+                this.$router.push({ name: 'poems-id', params: { id: data.id } })
+              } else {
+                console.log('Error', data)
+              }
+            })
+        }
+
       }
     },
     mounted() {
