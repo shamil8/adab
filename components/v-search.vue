@@ -58,7 +58,7 @@
 
     input {
       background: none;
-      color: var(--app-logo-text);
+      color: var(--app-text-normal);
     }
   }
 </style>

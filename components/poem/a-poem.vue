@@ -23,7 +23,9 @@
         <p @click="showPoem(poem)" v-html="poem.shortText" class="a-poem-item__info--text"></p>
 
         <p v-if="poem.poet" class="a-poem-item__info--address">Устод:
-          <el-link type="primary">{{poem.poet.name + ' ' + poem.poet.surname}}</el-link>
+          <el-link type="primary" @click="$router.push({ name: 'poets-id', params: { id: poem.poet.id } })">
+            {{poem.poet.name + ' ' + poem.poet.surname}}
+          </el-link>
         </p>
       </div>
     </el-card>
@@ -74,7 +76,7 @@
         font-size: 1.2rem;
         font-weight: 600;
         text-align: left;
-        color: var(--app-logo-text);
+        color: var(--app-text-normal);
         cursor: pointer;
         text-decoration: none;
         &:hover {
@@ -91,7 +93,7 @@
 
         &__edit, &__delete {
           cursor: pointer;
-          color: var(--app-logo-text);
+          color: var(--app-text-normal);
           &:hover {
             transition: 0.3s;
             color: $red;
@@ -113,12 +115,12 @@
 
       &--text {
         cursor: pointer;
-        color: var(--app-logo-text);
+        color: var(--app-text-main);
       }
 
       &--address {
         margin-top: 16px;
-        color: $grey;
+        color: var(--app-text-normal);
         font-size: 0.8rem;
       }
     }

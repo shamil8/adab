@@ -8,8 +8,6 @@ export const state = () => ({
 export const mutations = {
   setPoets(state, poets) {
     state.poets = poets
-
-    state.poets.push({id: 22, name: 'Садриддин', surname: 'Айни'})
   },
   setPoet(state, poet) {
     state.poets.push(poet)

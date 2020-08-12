@@ -35,7 +35,7 @@ export const actions = {
   async updatePoem({commit}, params) {
     try {
       const config = {
-        headers: {'Authorization': params.token}
+        headers: {'Authorization': `BEARER ${params.token}`}
       }
 
       const { data } = params.isUpdate

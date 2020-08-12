@@ -117,11 +117,10 @@
     },
     methods: {
       updatePoem() {
-        if (this.$store.getters["auth/hasToken"]) {   // You'll need to add validation!!!
+        if (this.$store.getters["auth/hasToken"]) {   // TODO: You'll need to add validation!!!
           this.poem.poet = this.poetId
-
           this.$store.dispatch('poem/updatePoem', {
-            token: 'BEARER ' + this.$store.getters["auth/token"],
+            token: this.$store.getters["auth/token"],
             data: this.poem,
             isUpdate: this.isUpdate
           })
@@ -129,7 +128,12 @@
               if (data.id) {
                 this.$router.push({ name: 'poems-id', params: { id: data.id } })
               } else {
-                console.log('Error', data)
+
+                this.$message({
+                  showClose: true,
+                  message: `Не получилось ${this.isUpdate ? 'обновить' : 'создать'} стихотворения`,
+                  type: 'error'
+                })
               }
             })
         }
@@ -157,7 +161,7 @@
           this.loadingPoem = false
         })
       } else this.poets = this.$store.getters['poet/poets']
-
+console.log(this.poets)
     }
   }
 </script>

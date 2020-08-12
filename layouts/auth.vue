@@ -69,7 +69,7 @@
       }
 
       a {
-        color: var(--app-text-color);
+        color: var(--app-text-main);
         &:hover {
           transition: 0.2s;
           color: $blue;

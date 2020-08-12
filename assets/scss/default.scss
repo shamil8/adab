@@ -16,11 +16,11 @@ body {
   background: radial-gradient( circle farthest-corner at -4% -12.9%,
     var(--app-background-second) 0.3%, var(--app-background) 90.2% ) no-repeat fixed;
   font-family: $g-font-family-default;
-  color: var(--app-text-color);
+  color: var(--app-text-main);
 }
 
 h3 {
-  color: var(--app-text-color);
+  color: var(--app-text-main);
   font-weight: normal;
   font-size: 18px;
 }

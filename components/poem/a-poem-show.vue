@@ -65,7 +65,7 @@
 
     &__card {
       background-color: var(--app-background);
-      color: var(--app-logo-text);
+      color: var(--app-text-normal);
       &--header, .header {  // card header
         &__back {
           display: inline-block;
@@ -97,7 +97,7 @@
           .el-collapse-item {  // Element UI collapse
             &__wrap, &__header {
               background-color: var(--app-background);
-              color: var(--app-logo-text);
+              color: var(--app-text-normal);
             }
             &__content {
               color: var(--app-logo-text);

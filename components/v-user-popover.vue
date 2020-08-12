@@ -93,7 +93,7 @@
 
     .el-button {
       background: var(--app-background);
-      color: var(--app-text-color);
+      color: var(--app-text-main);
     }
   }
 

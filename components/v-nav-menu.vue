@@ -162,21 +162,21 @@
     background: var(--app-background);
   }
   .el-menu--horizontal>.el-menu-item:not(.is-disabled), .el-menu-item, .el-submenu__title {
-    color: var(--app-text-color);
+    color: var(--app-text-main);
     transition: border-color .3s,background-color .3s,color .3s;
     /*transition: none;*/
 
     &:hover {
       background: var(--app-background-hover);
-      color: var(--app-text-color);
+      color: var(--app-text-main);
     }
     &:focus {
       background: var(--app-background-focus);
-      color: var(--app-text-color);
+      color: var(--app-text-main);
     }
 
     i {
-      color: var(--app-text-color);
+      color: var(--app-text-main);
     }
 
     &.is-active, &.is-active i {

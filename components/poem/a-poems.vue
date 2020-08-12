@@ -70,6 +70,7 @@
     @media (max-width: 560px) {
       padding: 24px;
     }
+
     &__new {
       font-size: 55px;
       color: $grey;

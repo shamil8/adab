@@ -17,8 +17,8 @@
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
     "nuxt-i18n": "^6.12.1",
-    "vuex": "latest",
-    "vue": "latest"
+    "vue": "latest",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^1.0.0",
