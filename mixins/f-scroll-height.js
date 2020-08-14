@@ -17,11 +17,10 @@ const fScrollHeight = {
   },
 
   methods: {
-    handleScroll() {  // TODO: You need to upgrade it!
+    handleScroll() {
       const pageYOffset = window.pageYOffset  // distances from the beginning of pages
       const parentHeader = this.$refs[this.refParentContainer]
       const header = this.$refs[this.refHeader]
-// console.log(pageYOffset)
       const clientWidth = parentHeader.hasOwnProperty('clientWidth')
         ? parentHeader.clientWidth : parentHeader.$el.clientWidth
 

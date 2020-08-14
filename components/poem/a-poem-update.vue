@@ -119,6 +119,7 @@
       updatePoem() {
         if (this.$store.getters["auth/hasToken"]) {   // TODO: You'll need to add validation!!!
           this.poem.poet = this.poetId
+          console.log(this.poem)
           this.$store.dispatch('poem/updatePoem', {
             token: this.$store.getters["auth/token"],
             data: this.poem,
@@ -128,7 +129,7 @@
               if (data.id) {
                 this.$router.push({ name: 'poems-id', params: { id: data.id } })
               } else {
-
+                console.log(data)
                 this.$message({
                   showClose: true,
                   message: `Не получилось ${this.isUpdate ? 'обновить' : 'создать'} стихотворения`,
@@ -161,7 +162,6 @@
           this.loadingPoem = false
         })
       } else this.poets = this.$store.getters['poet/poets']
-console.log(this.poets)
     }
   }
 </script>

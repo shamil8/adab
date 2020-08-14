@@ -20,13 +20,13 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchPoems({commit}) {
+  async fetchPoems({commit}) {    // get all poems
     const { data } = await this.$axios.get(url + '.jsonld')
 
     commit('setPoems', data['hydra:member'])
   },
 
-  async fetchPoem({commit}, params) {
+  async fetchPoem({commit}, params) { // get all poems get this(id) poem
     await this.$axios.get(url + `/${params.id}.json`)
       .then((res) => commit('setPoem', res.data))
       .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
@@ -39,7 +39,7 @@ export const actions = {
       }
 
       const { data } = params.isUpdate
-        ? await this.$axios.put(url + `/${params.data.id}`, params.data, config)    // change the poem
+        ? await this.$axios.put(`${url}/${params.data.id}`, params.data, config)    // change the poem
         : await this.$axios.post(url, params.data, config)                              // create a poem
 
       commit(params.isUpdate ? 'updatePoem' : 'setPoem', data)

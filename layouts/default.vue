@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar ref="myDiv" class="body__scrollbar" :native="false">
+  <div>
       <vTopBar />
       <vNavMenu />
       <main>
@@ -7,7 +7,7 @@
           <nuxt />
         </div>
       </main>
-  </el-scrollbar>
+  </div>
 </template>
 
 <script>
@@ -29,40 +29,36 @@
 </script>
 
 <style lang="scss">
-  body, #__nuxt, #__layout {
-    height: 100%;
-    overflow: hidden;
-  }
   .container {
     min-width: 346px;
     padding: 15px;
   }
 
-  .body__scrollbar {
-    height: 100%;
-    .el-scrollbar__thumb {
-      background-color: rgba(236, 182, 20, 0.7);
-
-      &:hover {
-        background-color: rgba(236, 182, 20, 1);
-      }
-
-    }
-    .el-scrollbar__wrap {
-      overflow-x: hidden;
-    }
-    .el-scrollbar__bar.is-horizontal {
-      display: none;
-    }
-    .el-collapse-item {  // Element UI collapse
-      &__wrap, &__header {
-        background-color: var(--app-background);
-        color: var(--app-text-normal);
-      }
-      &__content {
-        color: var(--app-logo-text);
-      }
-    }
-
-  }
+  /*.body__scrollbar {*/
+  /*  height: 100%;*/
+  /*  .el-scrollbar__thumb {*/
+  /*    background-color: rgba(236, 182, 20, 0.7);*/
+  /**/
+  /*    &:hover {*/
+  /*      background-color: rgba(236, 182, 20, 1);*/
+  /*    }*/
+  /**/
+  /*  }*/
+  /*  .el-scrollbar__wrap {*/
+  /*    overflow-x: hidden;*/
+  /*  }*/
+  /*  .el-scrollbar__bar.is-horizontal {*/
+  /*    display: none;*/
+  /*  }*/
+  /*  .el-collapse-item {  // Element UI collapse*/
+  /*    &__wrap, &__header {*/
+  /*      background-color: var(--app-background);*/
+  /*      color: var(--app-text-normal);*/
+  /*    }*/
+  /*    &__content {*/
+  /*      color: var(--app-logo-text);*/
+  /*    }*/
+  /*  }*/
+  /**/
+  /*}*/
 </style>
