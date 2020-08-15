@@ -46,7 +46,29 @@ export const actions = {
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
-  async fetchUser ({commit}, token) {
+  async fetchAuthUser(context, userData) {
+    try {
+      const {data} = await this.$axios.post('/api/auth_token', userData)  // get token this user
+
+      if(data.hasOwnProperty('token')) {  // if we got token
+        const {token} = data
+
+        // Save the token.
+        await context.dispatch('saveToken', {token, remember: true})
+
+        if (userData.hasOwnProperty('isLogin') && userData.isLogin === true) {  // we'll need to get user
+          await context.dispatch('fetchUser', token)  // got a user and save data
+        }
+
+        return {isSuccess: true}
+      }
+
+      return {isSuccess: false, error: 'Error auth user (we didn\'t get token)'}
+    } catch (e) {
+      return e
+    }
+  },
+  async fetchUser ({commit}, token) {   // after login | save user data
     try {
       const { data } = await this.$axios.post('/api/user', {token})
 
@@ -70,11 +92,5 @@ export const actions = {
     Cookies.remove('token')
 
     commit('logout')
-  },
-
-  async fetchOauthUrl (ctx, { provider }) {
-    const { data } = await this.$axios.post(`/oauth/${provider}`)
-
-    return data.url
   }
 }

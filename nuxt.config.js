@@ -1,4 +1,4 @@
-const baseUrl = 'https://adabapi.ga/'
+const baseUrl = 'https://adabapi.ga'
 
 export default {
   mode: 'universal',
@@ -76,13 +76,13 @@ export default {
       target: baseUrl,
       pathRewrite: { '^/api/logout' : '/logout' }
     },
+    '/api/users': { target: baseUrl },  // it didn't work because after it api user
     '/api/user': {
       target: baseUrl,
       pathRewrite: { '^/api/user' : '/user' }
     },
     '/api': {
       target: baseUrl,
-      pathRewrite: { '^/api' : '/api' },
       changeOrigin: true
     }
   }

@@ -75,23 +75,27 @@
           this.errors.forEach((error, i, errors) => errors[i].message = '')   // called new message
 
           this.$axios.post('/api/users', this.newUser)
-            .then(res => {
-              console.log(res.data)
-
+            .then(({data}) => {
+              data.password = this.newUser.password  //it's for token auth
               this.newUser = {}
+
               this.$message({   // alert message
                 showClose: true,
                 message: 'Авторизация пройдено успешно :)',
                 type: 'success'
               })
 
-              // this.$store.dispatch('login')
-              // this.$router.push('/')
+              // we get and save token (auth user)
+              this.$store.dispatch('auth/fetchAuthUser', data)
+                .then(({isSuccess, error}) =>
+                  isSuccess === true ? this.$router.push('/') : this.errorQueryCheck({error})
+                )
             })
             .catch(err => this.errorQueryCheck(err.response ? err.response.data : {}) )
             .then(() => this.formProcessing = false)
         })
       },
+
       getErrorForField(field, errors) {
         if (!errors && !errors.length) {
           return false

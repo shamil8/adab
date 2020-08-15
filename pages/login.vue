@@ -48,29 +48,18 @@
           if (!valid) return false
 
           this.formProcessing = true
+          this.loginForm.isLogin = true
 
-          this.$axios.post('/api/auth_token', this.loginForm)
-            .then(res => {
-              const token = res.data.token
-
-              // Save the token.
-              this.$store.dispatch('auth/saveToken', {token, remember: true})
-
-              // Fetch the user.
-              this.$store.dispatch('auth/fetchUser', token)
-
-              // Redirect index.
-              this.$router.push({ name: 'index' })
-            })
-            .catch(() => {
-              this.$message({
-                showClose: true,
-                message: 'Введен неверный логин или пароль!',
-                type: 'error'
-              })
-              // this.errorQueryCheck(err.response ? err.response.data : {})
-            })
-            .then(() => this.formProcessing = false)
+          this.$store.dispatch('auth/fetchAuthUser', this.loginForm)
+            .then(({isSuccess}) =>
+              isSuccess === true
+                ? this.$router.push('/')
+                : this.$message({
+                  showClose: true,
+                  message: 'Введен неверный логин или пароль!',
+                  type: 'error'
+                })
+            )
         })
       }
     }
