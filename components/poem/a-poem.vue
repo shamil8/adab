@@ -2,17 +2,26 @@
   <div class="a-poem">
     <el-card class="a-poem-item" :body-style="{ padding: '0px' }">
       <div slot="header" class="a-poem-item__header">
-        <span @click="showPoem(poem)" class="a-poem-item__header--title">
+        <span :class="{'a-poem-item__header--is-owner': $store.getters['auth/isUser'] && isOwner}"
+              @click="showPoem(poem)"
+              class="a-poem-item__header--title"
+        >
           {{poem.name}}
           <span><i class="el-icon-view"/></span>
         </span>
 
-        <div v-if="$store.getters['auth/hasToken']" class="a-poem-item__header--action">
-          <span @click="$router.push({ name: 'poems-id-update', params: { id: poem.id } })" class="action__edit">
+        <div v-if="$store.getters['auth/isUser']" class="a-poem-item__header--action">
+          <span v-if="isOwner || $store.getters['auth/isAdmin']"
+                @click="$router.push({ name: 'poems-id-update', params: { id: poem.id } })"
+                class="action__edit"
+          >
             <i class="el-icon-edit-outline"/>
           </span>
 
-          <span @click="$emit('removePoem')" class="action__delete">
+          <span v-if="isOwner || $store.getters['auth/isAdmin']"
+                @click="$emit('removePoem')"
+                class="action__delete"
+          >
             <i class="el-icon-delete"/>
             <!--          <i v-else class="el-icon-loading"/>-->
           </span>
@@ -45,10 +54,19 @@
         default: null
       }
     },
+    computed: {
+      isOwner() {
+        return this.poem.hasOwnProperty('owner')
+          && this.poem.owner['@id'] === this.$store.getters['auth/user']['@id']
+      }
+    },
     methods: {
       showPoem(poem) {
         this.$router.push({ name: 'poems-id', params: { id: poem.id } })
       }
+    },
+    mounted() {
+      console.log(this.poem, this.isOwner)
     }
   }
 </script>
@@ -73,6 +91,7 @@
       }
 
       &--title {
+        background: green;
         font-size: 1.2rem;
         font-weight: 600;
         text-align: left;
@@ -83,6 +102,12 @@
           transition: 0.3s;
           color: $blue;
         }
+      }
+
+      &--is-owner {
+        padding: 3px 6px;
+        border-radius: 3px;
+        background: var(--app-text-is-owner);
       }
 
       &--action, .action {

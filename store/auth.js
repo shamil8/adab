@@ -4,14 +4,27 @@ import Cookies from 'js-cookie'
 // state
 export const state = () => ({
   user: null,
-  token: null
+  token: null,
+  roles: {
+    user: 'ROLE_USER',
+    moderator: 'ROLE_MODERATOR',
+    admin: 'ROLE_ADMIN',
+    debug: 'ROLE_DEBUG',
+    teacher: 'ROLE_TEACHER'
+  }
 })
 
 // getters
 export const getters = {
   user: s => s.user,
   token: s => s.token,
-  hasToken: s => !!s.token
+  hasToken: s => !!s.token,
+  isUser: s => s.user.hasOwnProperty('roles')
+    && getters.hasToken(s)
+    && s.user.roles.includes(s.roles.user),
+
+  isAdmin: s => getters.isUser(s) && s.user.roles.includes(s.roles.admin),
+  isDebug: s => getters.isUser(s) && s.user.roles.includes(s.roles.debug),
 }
 
 // mutations

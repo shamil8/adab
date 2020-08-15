@@ -2,7 +2,7 @@
 /*
 * === COLORS ===
 */
-:root {
+:root {   // light
   // background colors
   --app-background: #FFFFFF;
   --app-background-second: #FFFFFF;
@@ -12,6 +12,7 @@
   // text colors
   --app-text-main: #3d3f44;
   --app-text-normal: #6C6E73;
+  --app-text-is-owner: rgba(255, 204, 51, 0.5);
 
   // Logo colors
   --app-logo-text: #3d3f44;
@@ -31,6 +32,7 @@
   // text colors
   --app-text-main: #FFFFFF;
   --app-text-normal: #DCDCDC;
+  --app-text-is-owner: rgba(50, 205, 50, 0.5);
 
   // Logo colors
   --app-logo-text: #DCDCDC;

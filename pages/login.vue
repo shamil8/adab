@@ -51,15 +51,19 @@
           this.loginForm.isLogin = true
 
           this.$store.dispatch('auth/fetchAuthUser', this.loginForm)
-            .then(({isSuccess}) =>
-              isSuccess === true
-                ? this.$router.push('/')
-                : this.$message({
+            .then(({isSuccess}) => {
+              if (isSuccess === true) {
+                this.$router.push('/')
+              } else {
+                this.$message({
                   showClose: true,
                   message: 'Введен неверный логин или пароль!',
                   type: 'error'
                 })
-            )
+
+                this.formProcessing = false
+              }
+            })
         })
       }
     }

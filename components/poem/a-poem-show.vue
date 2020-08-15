@@ -14,7 +14,8 @@
           <p class="body__content--poet">Устод:
             <el-link type="primary">{{poem.poet.name + ' ' + poem.poet.surname}}</el-link>
           </p>
-          <p class="body__content--owner">Добавил: {{poem.owner.name}}
+          <p class="body__content--owner">
+            Добавил: {{$store.getters['auth/isUser'] && isOwner ? 'вы' : ''}} {{poem.owner.name}}
             <!--      <el-link type="primary">{{poem.owner.name}}</el-link>-->
           </p>
           <p class="body__content--date">Последние изменения: {{poem.createdAtAgo}}</p>
@@ -56,6 +57,10 @@
     computed: {
       poem() {
         return this.$store.getters['poem/poemById'](+this.$route.params.id)
+      },
+      isOwner() {
+        return this.poem.hasOwnProperty('owner')
+          && this.poem.owner['@id'] === this.$store.getters['auth/user']['@id']
       }
     },
     methods: {
