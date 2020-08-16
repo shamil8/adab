@@ -19,7 +19,7 @@ export const getters = {
   user: s => s.user,
   token: s => s.token,
   hasToken: s => !!s.token,
-  isUser: s => s.user.hasOwnProperty('roles')
+  isUser: s => s.user && s.user.hasOwnProperty('roles')
     && getters.hasToken(s)
     && s.user.roles.includes(s.roles.user),
 

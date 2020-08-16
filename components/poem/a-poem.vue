@@ -56,7 +56,7 @@
     },
     computed: {
       isOwner() {
-        return this.poem.hasOwnProperty('owner')
+        return this.poem.hasOwnProperty('owner') && this.$store.getters['auth/user']
           && this.poem.owner['@id'] === this.$store.getters['auth/user']['@id']
       }
     },
@@ -64,9 +64,6 @@
       showPoem(poem) {
         this.$router.push({ name: 'poems-id', params: { id: poem.id } })
       }
-    },
-    mounted() {
-      console.log(this.poem, this.isOwner)
     }
   }
 </script>
@@ -91,7 +88,6 @@
       }
 
       &--title {
-        background: green;
         font-size: 1.2rem;
         font-weight: 600;
         text-align: left;
