@@ -13,7 +13,7 @@ build:
     - npm run build
   artifacts:
     paths:
-      - build/
+      - ./
 test:
   stage: test
   script:
