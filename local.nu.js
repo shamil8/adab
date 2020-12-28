@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:8080'
+const baseUrl = 'https://localhost:8000/'
 
 export default {
   mode: 'universal',
@@ -70,19 +70,26 @@ export default {
   proxy: {
     '/api/auth_token': {
       target: baseUrl,
-      pathRewrite: { '^/api/auth_token' : '/auth_token' }
+      pathRewrite: { '^/api/auth_token' : '/auth_token' },
+      secure: false,
+      changeOrigin: true
     },
     '/api/logout': {
       target: baseUrl,
-      pathRewrite: { '^/api/logout' : '/logout' }
+      pathRewrite: { '^/api/logout' : '/logout' },
+      secure: false,
+      changeOrigin: true
     },
-    '/api/users': { target: baseUrl },  // it didn't work because after it api user
     '/api/user': {
       target: baseUrl,
-      pathRewrite: { '^/api/user' : '/user' }
+      pathRewrite: { '^/api/user' : '/user' },
+      secure: false,
+      changeOrigin: true
     },
     '/api': {
       target: baseUrl,
+      pathRewrite: { '^/api' : '/api' },
+      secure: false,
       changeOrigin: true
     }
   }

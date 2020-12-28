@@ -44,11 +44,24 @@
       }
     },
     computed: {
+      searchText () {
+        return this.$store.getters['variables/getSearchText']
+      },
       poems() {
-        return this.$store.getters['poem/poems']
+        let poems = this.$store.getters['poem/poems']
+        if(this.searchText) {
+          poems = this.filterByName(this.searchText, poems)
+        }
+        return poems
       }
     },
     methods: {
+      filterByName(letter, arr){
+        const res = []
+        arr.forEach(item => item.name.indexOf(letter) === 0 && res.push(item))
+
+        return res
+      },
       removePoem() {
         this.delPoem.isDelModal = false
         console.log('We need to add query axios!', this.delPoem)

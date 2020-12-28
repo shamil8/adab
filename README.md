@@ -31,3 +31,8 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+# Docker build
+
+`docker build --tag adab_app:latest .`
+`docker run --name adab_app -d -p 3000:3000 adab_app:latest`
