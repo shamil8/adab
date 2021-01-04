@@ -6,7 +6,7 @@ ENV HOST 0.0.0.0
 ARG API_URL
 
 ENV API_URL=$API_URL
-ENV NODE_ENV=production
+#ENV NODE_ENV=production
 
 ENV NUXT_HOST=0.0.0.0
 
