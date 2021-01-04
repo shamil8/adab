@@ -1,28 +1,32 @@
-image: node:12.19.0-alpine
-
 stages:
   - build
-  - test
-  - deploy
-build:
+  - clean
+
+########################
+###   PRODUCTION     ###
+########################
+
+docker-build-master:
+  image: docker:latest
   stage: build
+  services:
+    - docker:dind
+  before_script:
+    - echo $CI_JOB_TOKEN | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
   only:
     - master
+#  tags:
+#    - adab
+
+# Clean some shit
+clean:
+  stage: clean
   script:
-    - npm install  --progress=false
-    - npm run build
-  artifacts:
-    paths:
-      - ./
-test:
-  stage: test
-  script:
-    - npm test
-deploy:
-  stage: deploy
+    - echo docker rmi "$CI_REGISTRY_IMAGE"
   only:
     - master
-  image: tstrohmeier/awscli
-  script:
-    - aws s3 cp build/ s3://react-cicd-test/ --recursive
-  when: manual
+#  tags:
+#    - adab

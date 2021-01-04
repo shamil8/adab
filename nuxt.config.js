@@ -1,4 +1,5 @@
-const baseUrl = 'http://localhost:8080'
+const baseUrl = process.env.API_URL || 'http://localhost:8080'
+
 
 export default {
   mode: 'universal',

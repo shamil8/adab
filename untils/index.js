@@ -6,7 +6,8 @@
  * @return {String|undefined}
  */
 export function cookieFromRequest (req, key) {
-  if (!req.headers.cookie) {
+
+  if (!req.headers || !req.headers.cookie) {
     return
   }
 
