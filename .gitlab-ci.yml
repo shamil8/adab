@@ -26,6 +26,7 @@ clean:
   stage: clean
   script:
     - echo docker rmi "$CI_REGISTRY_IMAGE"
+    - echo API_URL $API_URL
   only:
     - master
 #  tags:
