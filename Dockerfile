@@ -5,8 +5,7 @@ ENV HOST 0.0.0.0
 
 ARG API_URL
 
-ENV API_URL=$API_URL
-# EXAMPLE URL: http://adab.ga:8080
+ENV API_URL=http://adab.ga:8080
 #ENV NODE_ENV=production
 
 ENV NUXT_HOST=0.0.0.0
