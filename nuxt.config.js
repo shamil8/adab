@@ -1,6 +1,3 @@
-const baseUrl = process.env.API_URL || 'http://localhost:8080'
-
-
 export default {
   mode: 'universal',
   /*
@@ -66,26 +63,28 @@ export default {
     }
   },
   axios: {
-    proxy: true
+    baseURL: process.env.API_URL,
+    debug: process.env.NODE_ENV === 'development',
+    retry: { retries: 3 }
   },
-  proxy: {
-    '/api/auth_token': {
-      target: baseUrl,
-      pathRewrite: { '^/api/auth_token' : '/auth_token' }
-    },
-    '/api/logout': {
-      target: baseUrl,
-      pathRewrite: { '^/api/logout' : '/logout' }
-    },
-    '/api/users': { target: baseUrl },  // it didn't work because after it api user
-    '/api/user': {
-      target: baseUrl,
-      pathRewrite: { '^/api/user' : '/user' }
-    },
-    '/api': {
-      target: baseUrl,
-      changeOrigin: true
-    }
-  }
+  // proxy: {
+  //   '/api/auth_token': {
+  //     target: baseUrl,
+  //     pathRewrite: { '^/api/auth_token' : '/auth_token' }
+  //   },
+  //   '/api/logout': {
+  //     target: baseUrl,
+  //     pathRewrite: { '^/api/logout' : '/logout' }
+  //   },
+  //   '/api/users': { target: baseUrl },  // it didn't work because after it api user
+  //   '/api/user': {
+  //     target: baseUrl,
+  //     pathRewrite: { '^/api/user' : '/user' }
+  //   },
+  //   '/api': {
+  //     target: baseUrl,
+  //     changeOrigin: true
+  //   }
+  // }
 
 }
