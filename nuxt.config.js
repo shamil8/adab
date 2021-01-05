@@ -1,9 +1,21 @@
+// Some constants
+const title = 'Education portal'
+const description = 'Education portal description.'
+
+
 export default {
+  // target: 'server', // (For deployment https://nuxtjs.org/docs/2.x/get-started/commands/)
+  // env: process.env,
+  messages: {
+    error_404: 'Страница не найдена. Начните с главной.'
+  },
+
   /*
   ** Headers of the page
   */
   head: {
-    title: "Education portal Adab",
+    title,
+    titleTemplate: '%s — ' + title,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -63,6 +75,19 @@ export default {
   axios: {
     baseURL: process.env.API_URL,   // EXAMPLE URL: http://adab.ga:8080
     debug: process.env.NODE_ENV === 'development',
-    retry: { retries: 3 }
+    retry: { retries: 3 },
+    withCredentials: true
+  },
+
+  // Manifest override
+  manifest: {
+    name: title,
+    short_name: title,
+    description,
+    lang: 'ru-RU',
+    background_color: '#ffcc33',
+    display: 'standalone',
+    crossorigin: 'use-credentials',
+    gcm_sender_id: '103953800507'
   }
 }

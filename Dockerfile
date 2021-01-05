@@ -22,11 +22,10 @@ ADD ./ /app
 
 # install package
 RUN yarn install --frozen-lockfile
-#RUN yarn build
+RUN yarn build
 
 # expose 3000 on container
 EXPOSE 3000
 
 # start command
-CMD [ "yarn", "dev" ]
-#CMD [ "yarn", "start" ]
+CMD [ "yarn", "start" ]
