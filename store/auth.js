@@ -61,7 +61,7 @@ export const actions = {
 
   async fetchAuthUser(context, userData) {
     try {
-      const {data} = await this.$axios.post('/api/auth_token', userData)  // get token this user
+      const {data} = await this.$axios.post('/auth_token', userData)  // get token this user
 
       if(data.hasOwnProperty('token')) {  // if we got token
         const {token} = data
@@ -81,9 +81,9 @@ export const actions = {
       return e
     }
   },
-  async fetchUser ({commit}, token) {   // after login | save user data
+  async fetchUser ({ commit }, token) {   // after login | save user data
     try {
-      const { data } = await this.$axios.post('/api/user', {token})
+      const { data } = await this.$axios.post('/user', {token})
 
       data['@id'] = '/api/users/' + data.id
 
@@ -100,7 +100,7 @@ export const actions = {
   },
 
   logout ({ commit }) {
-    this.$axios.get('/api/logout')
+    this.$axios.get('/logout')
 
     Cookies.remove('token')
 

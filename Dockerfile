@@ -6,6 +6,7 @@ ENV HOST 0.0.0.0
 ARG API_URL
 
 ENV API_URL=$API_URL
+# EXAMPLE URL: http://adab.ga:8080
 #ENV NODE_ENV=production
 
 ENV NUXT_HOST=0.0.0.0
@@ -20,7 +21,7 @@ ADD ./ /app
 #RUN yarn add codecov
 
 # install package
-RUN yarn install
+RUN yarn install --frozen-lockfile
 #RUN yarn build
 
 # expose 3000 on container

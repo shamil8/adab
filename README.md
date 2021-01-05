@@ -35,4 +35,4 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 # Docker build
 
 `docker build --tag adab_app:latest .`
-`docker run --name adab_app -d -p 3000:3000 adab_app:latest`
+`docker run --name adab_app --env API_URL=//adab.ga:8080/ -d -p 3000:3000 adab_app:latest`

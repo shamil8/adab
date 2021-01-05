@@ -42,7 +42,6 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
     '@nuxtjs/style-resources'
   ],
   styleResources: {
@@ -62,28 +61,8 @@ export default {
     }
   },
   axios: {
-    baseURL: process.env.API_URL,
+    baseURL: process.env.API_URL,   // EXAMPLE URL: http://adab.ga:8080
     debug: process.env.NODE_ENV === 'development',
     retry: { retries: 3 }
-  },
-  // proxy: {
-  //   '/api/auth_token': {
-  //     target: baseUrl,
-  //     pathRewrite: { '^/api/auth_token' : '/auth_token' }
-  //   },
-  //   '/api/logout': {
-  //     target: baseUrl,
-  //     pathRewrite: { '^/api/logout' : '/logout' }
-  //   },
-  //   '/api/users': { target: baseUrl },  // it didn't work because after it api user
-  //   '/api/user': {
-  //     target: baseUrl,
-  //     pathRewrite: { '^/api/user' : '/user' }
-  //   },
-  //   '/api': {
-  //     target: baseUrl,
-  //     changeOrigin: true
-  //   }
-  // }
-
+  }
 }
