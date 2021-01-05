@@ -5,7 +5,7 @@ ENV HOST 0.0.0.0
 
 ARG API_URL
 
-ENV API_URL=//localhost:8080/
+ENV API_URL=$API_URL
 #ENV NODE_ENV=production
 
 ENV NUXT_HOST=0.0.0.0
@@ -20,11 +20,12 @@ ADD ./ /app
 #RUN yarn add codecov
 
 # install package
-RUN yarn install --frozen-lockfile
-RUN yarn build
+RUN yarn install
+#RUN yarn build
 
 # expose 3000 on container
 EXPOSE 3000
 
 # start command
-CMD [ "yarn", "start" ]
+CMD [ "yarn", "dev" ]
+#CMD [ "yarn", "start" ]
