@@ -75,8 +75,7 @@ export default {
   axios: {
     baseURL: process.env.API_URL,   // EXAMPLE URL: http://adab.ga:8080
     debug: process.env.NODE_ENV === 'development',
-    retry: { retries: 3 },
-    withCredentials: true
+    retry: { retries: 3 }
   },
 
   // Manifest override
