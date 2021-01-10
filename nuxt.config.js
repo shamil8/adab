@@ -48,6 +48,7 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/moment'
   ],
   /*
   ** Nuxt.js modules
@@ -72,10 +73,14 @@ export default {
     extend (config, ctx) {
     }
   },
+
   axios: {
     baseURL: process.env.API_URL,   // EXAMPLE URL: http://adab.ga:8080
     debug: process.env.NODE_ENV === 'development',
     retry: { retries: 3 }
+  },
+  moment: {
+    locales: ['tg']
   },
 
   // Manifest override

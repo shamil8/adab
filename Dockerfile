@@ -4,9 +4,9 @@ FROM node:12.19.0-alpine
 ENV HOST 0.0.0.0
 
 ARG API_URL
-
+# TODO:: CHANGE IT $API_URL!
 ENV API_URL=http://adab.ga:8080
-#ENV NODE_ENV=production
+ENV NODE_ENV=production
 
 ENV NUXT_HOST=0.0.0.0
 

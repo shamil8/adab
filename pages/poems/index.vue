@@ -1,5 +1,6 @@
 <template>
   <div class="poems-index">
+    <h1 class="poems-title">Шеърҳо</h1>
     <a-poems/>
 
   </div>
@@ -28,6 +29,9 @@
 
 <style lang="scss">
   .poems-index {
+    .poems-title {
+      margin-bottom: 15px;
 
+    }
   }
 </style>

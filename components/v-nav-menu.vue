@@ -14,17 +14,17 @@
           </el-menu-item>
           <el-menu-item index="poems">
             <i class="el-icon-collection"/>
-            <span slot="title">Poem</span>
+            <span slot="title">Poems</span>
+          </el-menu-item>
+
+          <el-menu-item index="poets">
+            <i class="el-icon-document"/>
+            <span slot="title">Poets нууз</span>
           </el-menu-item>
 
           <el-menu-item index="index">
             <i class="el-icon-menu"/>
             <span slot="title">Home</span>
-          </el-menu-item>
-
-          <el-menu-item index="4" disabled>
-            <i class="el-icon-document"/>
-            <span slot="title">Navigator Three</span>
           </el-menu-item>
 
           <el-menu-item index="settings">
