@@ -12,7 +12,12 @@
 
         <div class="body__content">
           <p class="body__content--poet">Устод:
-            <el-link type="primary">{{poem.poet.name + ' ' + poem.poet.surname}}</el-link>
+            <el-link
+              @click="$router.push({ name: 'poets-id', params: { id: poem.poet.id } })"
+              type="primary"
+            >
+              {{poem.poet.name + ' ' + poem.poet.surname}}
+            </el-link>
           </p>
           <p class="body__content--owner">
             Добавил: {{$store.getters['auth/isUser'] && isOwner ? 'вы' : ''}} {{poem.owner.name}}
