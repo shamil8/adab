@@ -35,9 +35,21 @@
           </el-collapse-item>
         </el-collapse>
 
+        <br>
+        <h3>Poems</h3>
+        <div v-for="(urlPoem, index) in poet.poems" style="margin: 8px;" >
+          <el-link
+            @click="$router.push({ name: 'poems-id', params: { id: Number(urlPoem.slice(11)) } })"
+            :title="urlPoem"
+            type="primary"
+          >
+            Poem #{{ index + 1 }}
+          </el-link>
+        </div>
         <p class="last-change">The last change: {{poet.createdAtAgo || '-'}}</p>
       </div>
     </el-card>
+
   </div>
 </template>
 
