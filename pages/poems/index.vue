@@ -1,6 +1,6 @@
 <template>
   <div class="poems-index">
-    <h1 class="poems-title">Шеърҳо</h1>
+    <h1 class="poems-title">Poems</h1>
     <a-poems/>
 
   </div>

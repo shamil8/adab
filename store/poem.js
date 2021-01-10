@@ -28,7 +28,7 @@ export const actions = {
 
   async fetchPoem({ commit }, params) { // get all poems get this(id) poem
     await this.$axios.get(url + `/${params.id}.json`)
-      .then((res) => commit('setPoem', res.data))
+      .then( ({ data }) => commit('setPoem', data))
       .catch( () => params.error({ statusCode: 404, message: 'Poem not found' }) )
   },
 

@@ -1,6 +1,6 @@
 <template>
   <div class="poets-index">
-    <h1 class="poets-title">Нависандагон</h1>
+    <h1 class="poets-title">Poets</h1>
 
     <a-poets/>
   </div>
@@ -10,7 +10,7 @@
 import aPoets from '~/components/poet/a-poets'
 
 export default {
-  name: "poets",
+  name: 'poetsIndex',
   async asyncData ({ store }) {
     if(store.getters['poet/poets'].length === 0) {
       await store.dispatch('poet/fetchPoets')

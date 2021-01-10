@@ -1,8 +1,8 @@
 <template>
-  <el-card :body-style="{ padding: '0px' }">
-    <img @click="showPoet(poet.id)" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-    <div style="padding: 14px;">
-      <span  @click="showopenPoet(poet.id)">{{ `${poet.name} ${poet.surname}` }}</span>
+  <el-card>
+    <img @click="showPoet(poet.id)" :src="poet.url || url" class="image">
+    <div class="main-cont" style="padding: 14px;">
+      <span class="name" @click="showPoet(poet.id)">{{ `${poet.name} ${poet.surname}` }}</span>
       <div class="bottom clearfix">
         <time class="time date-birth">Тавалуд: {{ getYear(poet.dateBirth) }}</time>
         <time class="time">Вафот: {{ getYear(poet.dateDeath) }}</time>
@@ -10,7 +10,6 @@
       </div>
     </div>
   </el-card>
-
 </template>
 
 <script>
@@ -22,7 +21,7 @@ export default {
   },
   data () {
     return {
-      url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+      url: '/default-poet.png'
     }
   },
   methods: {
@@ -38,31 +37,45 @@ export default {
 }
 </script>
 
-<style scoped>
-.time {
-  display: block;
-  font-size: 13px;
-  color: #999;
-}
-
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-}
-
-.right-but {
-  padding: 0;
-  float: right;
-}
-
+<style lang="scss" scoped>
 .image {
   width: 100%;
   max-height: 150px;
   display: block;
+  cursor: pointer;
 }
 
-.date-birth {
-  margin-bottom: 7px;
+.main-cont {
+  padding: 14px 0 0  !important;
+
+  .name {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      transition: 200ms;
+    }
+  }
+
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .date-birth {
+    margin-bottom: 7px;
+  }
+
+  .time {
+    display: block;
+    font-size: 13px;
+    color: #999;
+  }
+
+  .right-but {
+    padding: 0;
+    float: right;
+  }
 }
 
 .clearfix:before,

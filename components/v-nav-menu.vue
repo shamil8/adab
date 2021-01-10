@@ -19,7 +19,7 @@
 
           <el-menu-item index="poets">
             <i class="el-icon-document"/>
-            <span slot="title">Poets нууз</span>
+            <span slot="title">Poets</span>
           </el-menu-item>
 
           <el-menu-item index="index">

@@ -2,7 +2,7 @@
   <el-row class="a-poets">
     <el-col
       v-for="(poet, index) in poets"
-      :span="4"
+      :span="5"
       :key="poet.id"
       :offset="index > 0 ? 1 : 0"
     >
@@ -58,7 +58,7 @@ export default {
 .a-poets {
 
   .a-poet {
-    cursor: pointer;
+
   }
 }
 </style>

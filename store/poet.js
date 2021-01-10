@@ -23,12 +23,15 @@ export const actions = {
   },
 
   async fetchPoet({ commit }, params) {
-    await this.$axios.get(url + `/${params.id}.json`)
-      .then(({ data }) => commit('setPoet', data))
-      .catch( () => params.error({ statusCode: 404, message: 'Poet not found' }) )
+    try {
+      const data = await this.$axios.$get(`${url}/${params.id}.json`)
+      commit('setPoet', data)
+    } catch (err) {
+      params.error({ statusCode: 404, message: 'Poet not found' })
+    }
   },
 
-  async updatePoet({commit}, params) {
+  async updatePoet({ commit }, params) {
     try {
       const { data } = await this.$axios.put(url + `/${params.data.id}`, params.data, {
         headers: {'Authorization': params.token}
@@ -45,6 +48,6 @@ export const actions = {
 
 export const getters = ({
   poets: s => s.poets,
-  poetById: s => id => s.poets.find(poet => poet['@id'] === id)
+  poetById: s => id => s.poets.find(poet => poet.id === id)
 
 })
