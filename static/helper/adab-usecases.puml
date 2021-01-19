@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+title "Варианты использования систымы (верхнеуровневые)"
+
+left to right direction
+
+actor "Гость" as Guest
+
+' Автор
+usecase "Регистрация" as Register
+usecase "Аутентификация" as Login
+
+Guest -- Register
+Guest -- Login
+
+' Everything for User and Admin
+actor "Пользователь" as User
+actor "Администратор" as Admin
+Admin -left-|> User
+User -left-|> Guest
+
+usecase CreatePoet as "Создать стихотворения"
+usecase UpdatePoet as "Редактировать стих"
+
+User -- CreatePoet
+User -- UpdatePoet
+
+'Admin --- CreatePoet
+'Admin --- UpdatePoet
+Admin -- (Применять << Main >> либо отклоянть созданный стих юзера)
+
+' for Admin
+
+@enduml
