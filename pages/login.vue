@@ -25,11 +25,10 @@
   export default {
     name: 'login',
     layout: 'auth',
-    async asyncData ({ store }) {
-      console.log('asyncDATA_TOKEN', store.getters['auth/token'])
-      // if (store.getters['auth/token']) {
-      //   await store.dispatch('poem/fetchPoems')
-      // }
+    async asyncData ({ store, redirect }) {
+      if (store.getters['auth/hasToken']) {
+        redirect({ name: 'index', message: 'You are already in Adab!' })
+      }
     },
     mixins: [ pAuthError ],
     data() {

@@ -85,8 +85,12 @@
     }
 
     &__new {
+      background: var(--app-background);
       font-size: 55px;
-      color: $grey;
+
+      .el-icon-plus {
+        color: var(--app-text-normal);
+      }
     }
   }
 </style>

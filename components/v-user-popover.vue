@@ -13,15 +13,12 @@
       <img class="v-user-popover__container--image" src="../assets/images/avatar.png" alt="Img">
       <h3 class="v-user-popover__container--name">{{user.name ? user.name : 'Hi!'}}</h3>
       <cDayNightToggle class="v-user-popover__container--day-night"/>
-<!--      @click="$router.push({ name: 'poets-id', params: { id: poem.poet.id } })"-->
-      <el-link
+      <el-button
         @click="$router.push({ name: 'settings' })"
-        type="primary"
         class="ling-settings"
       >
-        <el-button><i class="el-icon-setting"/> Settings</el-button>
-      </el-link>
-<!--      <nuxt-link to="settings"></nuxt-link>-->
+        <i class="el-icon-setting"/> Settings
+      </el-button>
       <el-button @click.prevent="logout"><i class="el-icon-pear"/>Log out</el-button>
     </div>
 
