@@ -56,7 +56,6 @@ export const actions = {
   saveToken ({commit}, {token, remember}) {
     commit('setToken', token)
 
-    console.log(token, remember)
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
@@ -70,7 +69,7 @@ export const actions = {
         // Save the token.
         await context.dispatch('saveToken', {token, remember: true})
 
-        if (userData.hasOwnProperty('isLogin') && userData.isLogin === true) {  // we'll need to get user
+        if (userData.hasOwnProperty('isLogin') && userData.isLogin === true) {  // we need to get user
           await context.dispatch('fetchUser', {token})  // got a user and save data
         }
 
@@ -79,11 +78,10 @@ export const actions = {
 
       return { isSuccess: false, error: 'Error auth user (we didn\'t get token)' }
     } catch (e) {
-      return e
+      console.log('Error from fetchAuthUser with message:', e)
     }
   },
   async fetchUser ({ commit }, {token, urlWithoutProxy}) {   // after login | save user data
-    console.log('SO i am here!!!', 'urlForProxy', urlWithoutProxy)
     try {
       const data = await this.$axios.$post(`${urlWithoutProxy ? urlWithoutProxy: '/api'}/user`, { token })
 

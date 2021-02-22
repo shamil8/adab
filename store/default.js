@@ -23,7 +23,7 @@ export const state = () => ({
 
 export const mutations = {
   setTheme (state, status) {
-    const htmlElement = document.querySelector('html')
+    const htmlElement = window.document.querySelector('html')
 
     htmlElement.setAttribute('theme', status)
     state.theme = status
