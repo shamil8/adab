@@ -23,8 +23,14 @@
   import pAuthError from '../mixins/p-auth-error'
 
   export default {
-    name: "login",
+    name: 'login',
     layout: 'auth',
+    async asyncData ({ store }) {
+      console.log('asyncDATA_TOKEN', store.getters['auth/token'])
+      // if (store.getters['auth/token']) {
+      //   await store.dispatch('poem/fetchPoems')
+      // }
+    },
     mixins: [ pAuthError ],
     data() {
       return {

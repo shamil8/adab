@@ -33,15 +33,15 @@ export const mutations = {
     state.token = token
   },
 
-  setUser(state, user) {
+  SET_USER(state, user) {
     state.user = user
   },
 
-  clearToken(state) {
+  CLEAR_TOKEN(state) {
     state.token = null
   },
 
-  logout(state) {
+  LOGOUT(state) {
     state.user = null
     state.token = null
   },
@@ -56,42 +56,44 @@ export const actions = {
   saveToken ({commit}, {token, remember}) {
     commit('setToken', token)
 
+    console.log(token, remember)
     Cookies.set('token', token, { expires: remember ? 365 : null })
   },
 
   async fetchAuthUser(context, userData) {
     try {
-      const {data} = await this.$axios.post('/api/auth_token', userData)  // get token this user
+      const { data } = await this.$axios.post('/api/auth_token', userData)  // get token this user
 
       if(data.hasOwnProperty('token')) {  // if we got token
-        const {token} = data
+        const { token } = data
 
         // Save the token.
         await context.dispatch('saveToken', {token, remember: true})
 
         if (userData.hasOwnProperty('isLogin') && userData.isLogin === true) {  // we'll need to get user
-          await context.dispatch('fetchUser', token)  // got a user and save data
+          await context.dispatch('fetchUser', {token})  // got a user and save data
         }
 
         return {isSuccess: true}
       }
 
-      return {isSuccess: false, error: 'Error auth user (we didn\'t get token)'}
+      return { isSuccess: false, error: 'Error auth user (we didn\'t get token)' }
     } catch (e) {
       return e
     }
   },
-  async fetchUser ({ commit }, token) {   // after login | save user data
+  async fetchUser ({ commit }, {token, urlWithoutProxy}) {   // after login | save user data
+    console.log('SO i am here!!!', 'urlForProxy', urlWithoutProxy)
     try {
-      const { data } = await this.$axios.post('/api/user', {token})
+      const data = await this.$axios.$post(`${urlWithoutProxy ? urlWithoutProxy: '/api'}/user`, { token })
 
       data['@id'] = '/api/users/' + data.id
 
-      commit('setUser', data)
+      commit('SET_USER', data)
     } catch (e) {
+      console.log('Error from fetchUser with message:', e)
       Cookies.remove('token')
-
-      commit('clearToken')
+      commit('CLEAR_TOKEN')
     }
   },
 
@@ -104,6 +106,6 @@ export const actions = {
 
     Cookies.remove('token')
 
-    commit('logout')
+    commit('LOGOUT')
   }
 }

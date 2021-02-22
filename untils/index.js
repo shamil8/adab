@@ -7,7 +7,7 @@
  */
 export function cookieFromRequest (req, key) {
 
-  if (!req.headers || !req.headers.cookie) {
+  if (!req || !req.headers || !req.headers.cookie) {
     return
   }
 

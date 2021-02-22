@@ -1,12 +1,12 @@
 <template>
-  <div class="settings">
+  <div v-if="user" class="settings">
     <h1>Settings</h1>
     <br>
     <div class="settings-cont">
       <p>Name: <i>{{ user.name }}</i></p>
       <p>Email: <i>{{ user.email }}</i></p>
       <br>
-      <p>
+      <p v-if="user && user.roles.length">
         <b>Roles:</b> <br>
         <template v-for="role in user.roles">
           <span>{{ role }}</span> <br>
@@ -18,8 +18,8 @@
 
 <script>
 export default {
-  middleware: ['auth'],
-  name: "settings",
+  middleware: 'auth',
+  name: 'settings',
   components: {
 
   },

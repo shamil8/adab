@@ -1,5 +1,5 @@
 // Some constants
-const baseUrl = process.env.API_URL || 'http://localhost:8000/'
+const baseUrl = process.env.API_URL || 'http://localhost:8080'
 const title = 'Education portal'
 const description = 'Education portal description.'
 
@@ -69,14 +69,17 @@ export default {
   */
   build: {
     transpile: [/^element-ui/],
-    /*
+    /**
     ** You can extend webpack config here
     */
     extend (config, ctx) {
     }
   },
 
-  axios: { proxy: true },
+  axios: {
+    debug: process.env.NODE_ENV === 'development',
+    proxy: true
+  },
   proxy: {
     '/api/auth_token': {
       target: baseUrl,

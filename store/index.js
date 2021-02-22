@@ -4,10 +4,12 @@ import { cookieFromRequest } from '../untils'
 export const actions = {
   async nuxtServerInit ({ commit, dispatch }, { req }) {
     const token = cookieFromRequest(req, 'token')
+
     if (token) {
+      const urlWithoutProxy = process.env.API_URL || 'http://localhost:8080'
       commit('auth/setToken', token)
 
-      await dispatch('auth/fetchUser', token)
+      await dispatch('auth/fetchUser', {token, urlWithoutProxy})
     }
 
     const locale = cookieFromRequest(req, 'locale')
@@ -16,20 +18,21 @@ export const actions = {
     }
   },
 
-  nuxtClientInit ({ commit }) {
-    // const token = Cookies.get('token')
-    // if (token) {
-    //   commit('auth/setToken', token)
-    // }
+  async nuxtClientInit ({ commit, dispatch }) {
+    const token = Cookies.get('token') // TODO:: CHECK IT, MAYBE NEED TO ADD 'await'!!!!
+    console.log('tokenFromClient', token)
+
+    if (token) {
+      commit('auth/setToken', token)
+
+      await dispatch('auth/fetchUser', {token})
+
+    }
 
     const locale = Cookies.get('locale')
-    if (locale) {
-      commit('lang/SET_LOCALE', { locale })
-    }
+    locale && commit('lang/SET_LOCALE', { locale })
 
     const themeSting = Cookies.get('theme')
-    if (themeSting) {
-      commit('default/setTheme', themeSting)
-    }
+    themeSting && commit('default/setTheme', themeSting)
   }
 }
